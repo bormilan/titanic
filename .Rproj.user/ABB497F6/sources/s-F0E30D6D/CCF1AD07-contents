@@ -1,0 +1,19 @@
+---
+title: "Titanic Temalabor"
+output: html_notebook
+---
+
+Olvassuk be az adatokat:
+```{r}
+train <- read.csv('train.csv')
+test <- read.csv('test.csv')
+valid <- read.csv('gender_submission.csv')
+```
+
+Nezzuk meg hogy az utasok hany szazaleka elte tul a tanito adathalmazban:
+```{r}
+temp <- table(train$Survived == 1)
+pct <- (temp[2] / (temp[1] + temp[2]))*100
+cat(round(pct,2),"%")
+```
+
