@@ -254,6 +254,33 @@ valid &lt;- read.csv(&#39;gender_submission.csv&#39;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Elemezzuk a tipusaikat es ertekeiket:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKHRyYWluKVxuc2FwcGx5KHRyYWluLCBmdW5jdGlvbih5KSBzdW0obGVuZ3RoKHdoaWNoKGlzLm5hKHkpKSkpKVxuc2FwcGx5KHRyYWluLCBmdW5jdGlvbih5KSBzdW0obGVuZ3RoKHdoaWNoKHkgPT0gXCJcIikpKSlcbmBgYCJ9 -->
+<pre class="r"><code>str(train)
+sapply(train, function(y) sum(length(which(is.na(y)))))
+sapply(train, function(y) sum(length(which(y == &quot;&quot;))))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Tehat az Age oszlopban 177 na ertek van, ezert ezeket a sorokat torolni kell. A Cabin oszlopban pedig 687 ures rekord, ezert az egeszet eldobom, ugyanis igy nem veszem hasznat. Az embarked oszlopban van meg ket ures rekord, ezekbe egyesevel beletoltom az oszlop legtobbszor megjeleno erteket.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFja3VwIDwtIHRyYWluXG50cmFpbiA8LSBiYWNrdXBcbnRyYWluIDwtIG5hLm9taXQodHJhaW4pXG5cbnRyYWluJENhYmluIDwtIE5VTExcblxubnVsbHMgPC0gdHJhaW5bdHJhaW4kRW1iYXJrZWQgPT0gXCJcIixdXG50YWJsZSh0cmFpbiRFbWJhcmtlZClcbnRyYWluW3RyYWluJE5hbWUgPT0gXCJJY2FyZCwgTWlzcy4gQW1lbGllXCIsXCJFbWJhcmtlZFwiXSA8LSBcIkNcIlxudHJhaW5bdHJhaW4kTmFtZSA9PSBcIlN0b25lLCBNcnMuIEdlb3JnZSBOZWxzb24gKE1hcnRoYSBFdmVseW4pXCIsXCJFbWJhcmtlZFwiXSA8LSBcIkNcIlxuYGBgIn0= -->
+<pre class="r"><code>backup &lt;- train
+train &lt;- backup
+train &lt;- na.omit(train)
+
+train$Cabin &lt;- NULL
+
+nulls &lt;- train[train$Embarked == &quot;&quot;,]
+table(train$Embarked)
+train[train$Name == &quot;Icard, Miss. Amelie&quot;,&quot;Embarked&quot;] &lt;- &quot;C&quot;
+train[train$Name == &quot;Stone, Mrs. George Nelson (Martha Evelyn)&quot;,&quot;Embarked&quot;] &lt;- &quot;C&quot;</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <p>Nezzuk meg hogy az utasok hany szazaleka elte tul a tanito adathalmazban:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -264,9 +291,50 @@ cat(round(pct,2),&quot;%&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>nezzuk meg hogy a tulelok hogyan oszlanak meg nemek szerint:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZl9zZXggPC0gZmFjdG9yKHRyYWluJFNleClcbmZfc3Vydml2ZWQgPC0gZmFjdG9yKHRyYWluJFN1cnZpdmVkKVxubWFsZXMgPC0gbGVuZ3RoKHRyYWluW3RyYWluJFN1cnZpdmVkID09IDEgJiB0cmFpbiRTZXggPT0gXCJtYWxlXCIsXCJOYW1lXCJdKVxuZmVtYWxlcyA8LSBsZW5ndGgodHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSAmIHRyYWluJFNleCA9PSBcImZlbWFsZVwiLFwiTmFtZVwiXSlcbmFsbF9zdXJ2aXZlZCA8LSBtYWxlcyArIGZlbWFsZXNcbmNhdChcIsSC4oCTc3N6ZXNlbiB0xILFn2zEgsKpbHRlOlwiLGFsbF9zdXJ2aXZlZCxcImVtYmVyLCBlYmLEueKAmGxcIixmZW1hbGVzLFwiIG7EueKAmCwgxILCqXNcIixtYWxlcyxcImbEgsKpcmZpXCIpXG5gYGAifQ== -->
+<pre class="r"><code>f_sex &lt;- factor(train$Sex)
+f_survived &lt;- factor(train$Survived)
+males &lt;- length(train[train$Survived == 1 &amp; train$Sex == &quot;male&quot;,&quot;Name&quot;])
+females &lt;- length(train[train$Survived == 1 &amp; train$Sex == &quot;female&quot;,&quot;Name&quot;])
+all_survived &lt;- males + females
+cat(&quot;Ă–sszesen tĂşlĂ©lte:&quot;,all_survived,&quot;ember, ebbĹ‘l&quot;,females,&quot; nĹ‘, Ă©s&quot;,males,&quot;fĂ©rfi&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Nezzuk meg az emberek korainak eloszlasat:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdCh4ID0gdHJhaW4kU2V4LCB5ID0gdHJhaW4kQWdlLFxuY29sID1cImJsdWVcIiwgcGNoID0gMSwgY2V4ID0gMS41LFxubWFpbiA9IFwiVXRhc29rIGtvciBlbG9zemzEgsuHc2EgbmVtIHN6ZXJpbnRcIixcbnhsYWIgPSBcIlwiLFxueWxhYiA9IFwiS29yXCJcbilcbmBgYCJ9 -->
+<pre class="r"><code>plot(x = train$Sex, y = train$Age,
+col =&quot;blue&quot;, pch = 1, cex = 1.5,
+main = &quot;Utasok kor eloszlĂˇsa nem szerint&quot;,
+xlab = &quot;&quot;,
+ylab = &quot;Kor&quot;
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Most nezzuk meg hogy ez hogy nez ki, ha csak a tuleloket vesszuk bele:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3Vydml2ZWQgPC0gdHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSxdXG5cbnBsb3QoeCA9IHN1cnZpdmVkJFNleCwgeSA9IHN1cnZpdmVkJEFnZSxcbmNvbCA9XCJibHVlXCIsIHBjaCA9IDEsIGNleCA9IDEuNSxcbm1haW4gPSBcIlV0YXNvayBrb3IgZWxvc3psxILLh3NhIG5lbSBzemVyaW50XCIsXG54bGFiID0gXCJcIixcbnlsYWIgPSBcIktvclwiXG4pXG5gYGAifQ== -->
+<pre class="r"><code>survived &lt;- train[train$Survived == 1,]
+
+plot(x = survived$Sex, y = survived$Age,
+col =&quot;blue&quot;, pch = 1, cex = 1.5,
+main = &quot;Utasok kor eloszlĂˇsa nem szerint&quot;,
+xlab = &quot;&quot;,
+ylab = &quot;Kor&quot;
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRpdGFuaWMgVGVtYWxhYm9yIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KT2x2YXNzdWsgYmUgYXogYWRhdG9rYXQ6DQpgYGB7cn0NCnRyYWluIDwtIHJlYWQuY3N2KCd0cmFpbi5jc3YnKQ0KdGVzdCA8LSByZWFkLmNzdigndGVzdC5jc3YnKQ0KdmFsaWQgPC0gcmVhZC5jc3YoJ2dlbmRlcl9zdWJtaXNzaW9uLmNzdicpDQpgYGANCg0KTmV6enVrIG1lZyBob2d5IGF6IHV0YXNvayBoYW55IHN6YXphbGVrYSBlbHRlIHR1bCBhIHRhbml0byBhZGF0aGFsbWF6YmFuOg0KYGBge3J9DQp0ZW1wIDwtIHRhYmxlKHRyYWluJFN1cnZpdmVkID09IDEpDQpwY3QgPC0gKHRlbXBbMl0gLyAodGVtcFsxXSArIHRlbXBbMl0pKSoxMDANCmNhdChyb3VuZChwY3QsMiksIiUiKQ0KYGBgDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRpdGFuaWMgVGVtYWxhYm9yIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KT2x2YXNzdWsgYmUgYXogYWRhdG9rYXQ6DQpgYGB7cn0NCnRyYWluIDwtIHJlYWQuY3N2KCd0cmFpbi5jc3YnKQ0KdGVzdCA8LSByZWFkLmNzdigndGVzdC5jc3YnKQ0KdmFsaWQgPC0gcmVhZC5jc3YoJ2dlbmRlcl9zdWJtaXNzaW9uLmNzdicpDQpgYGANCg0KRWxlbWV6enVrIGEgdGlwdXNhaWthdCBlcyBlcnRla2Vpa2V0Og0KYGBge3J9DQpzdHIodHJhaW4pDQpzYXBwbHkodHJhaW4sIGZ1bmN0aW9uKHkpIHN1bShsZW5ndGgod2hpY2goaXMubmEoeSkpKSkpDQpzYXBwbHkodHJhaW4sIGZ1bmN0aW9uKHkpIHN1bShsZW5ndGgod2hpY2goeSA9PSAiIikpKSkNCmBgYA0KVGVoYXQgYXogQWdlIG9zemxvcGJhbiAxNzcgbmEgZXJ0ZWsgdmFuLCBlemVydCBlemVrZXQgYSBzb3Jva2F0IHRvcm9sbmkga2VsbC4NCkEgQ2FiaW4gb3N6bG9wYmFuIHBlZGlnIDY4NyB1cmVzIHJla29yZCwgZXplcnQgYXogZWdlc3pldCBlbGRvYm9tLCB1Z3lhbmlzIGlneSBuZW0gdmVzemVtIGhhc3puYXQuDQpBeiBlbWJhcmtlZCBvc3psb3BiYW4gdmFuIG1lZyBrZXQgdXJlcyByZWtvcmQsIGV6ZWtiZSBlZ3llc2V2ZWwgYmVsZXRvbHRvbSBheiBvc3psb3AgbGVndG9iYnN6b3IgbWVnamVsZW5vIGVydGVrZXQuDQoNCmBgYHtyfQ0KYmFja3VwIDwtIHRyYWluDQp0cmFpbiA8LSBiYWNrdXANCnRyYWluIDwtIG5hLm9taXQodHJhaW4pDQoNCnRyYWluJENhYmluIDwtIE5VTEwNCg0KbnVsbHMgPC0gdHJhaW5bdHJhaW4kRW1iYXJrZWQgPT0gIiIsXQ0KdGFibGUodHJhaW4kRW1iYXJrZWQpDQp0cmFpblt0cmFpbiROYW1lID09ICJJY2FyZCwgTWlzcy4gQW1lbGllIiwiRW1iYXJrZWQiXSA8LSAiQyINCnRyYWluW3RyYWluJE5hbWUgPT0gIlN0b25lLCBNcnMuIEdlb3JnZSBOZWxzb24gKE1hcnRoYSBFdmVseW4pIiwiRW1iYXJrZWQiXSA8LSAiQyINCmBgYA0KDQoNCk5lenp1ayBtZWcgaG9neSBheiB1dGFzb2sgaGFueSBzemF6YWxla2EgZWx0ZSB0dWwgYSB0YW5pdG8gYWRhdGhhbG1hemJhbjoNCmBgYHtyfQ0KdGVtcCA8LSB0YWJsZSh0cmFpbiRTdXJ2aXZlZCA9PSAxKQ0KcGN0IDwtICh0ZW1wWzJdIC8gKHRlbXBbMV0gKyB0ZW1wWzJdKSkqMTAwDQpjYXQocm91bmQocGN0LDIpLCIlIikNCmBgYA0KbmV6enVrIG1lZyBob2d5IGEgdHVsZWxvayBob2d5YW4gb3N6bGFuYWsgbWVnIG5lbWVrIHN6ZXJpbnQ6DQpgYGB7cn0NCmZfc2V4IDwtIGZhY3Rvcih0cmFpbiRTZXgpDQpmX3N1cnZpdmVkIDwtIGZhY3Rvcih0cmFpbiRTdXJ2aXZlZCkNCm1hbGVzIDwtIGxlbmd0aCh0cmFpblt0cmFpbiRTdXJ2aXZlZCA9PSAxICYgdHJhaW4kU2V4ID09ICJtYWxlIiwiTmFtZSJdKQ0KZmVtYWxlcyA8LSBsZW5ndGgodHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSAmIHRyYWluJFNleCA9PSAiZmVtYWxlIiwiTmFtZSJdKQ0KYWxsX3N1cnZpdmVkIDwtIG1hbGVzICsgZmVtYWxlcw0KY2F0KCLDlnNzemVzZW4gdMO6bMOpbHRlOiIsYWxsX3N1cnZpdmVkLCJlbWJlciwgZWJixZFsIixmZW1hbGVzLCIgbsWRLCDDqXMiLG1hbGVzLCJmw6lyZmkiKQ0KYGBgDQoNCk5lenp1ayBtZWcgYXogZW1iZXJlayBrb3JhaW5hayBlbG9zemxhc2F0Og0KYGBge3J9DQpwbG90KHggPSB0cmFpbiRTZXgsIHkgPSB0cmFpbiRBZ2UsDQpjb2wgPSJibHVlIiwgcGNoID0gMSwgY2V4ID0gMS41LA0KbWFpbiA9ICJVdGFzb2sga29yIGVsb3N6bMOhc2EgbmVtIHN6ZXJpbnQiLA0KeGxhYiA9ICIiLA0KeWxhYiA9ICJLb3IiDQopDQpgYGANCk1vc3QgbmV6enVrIG1lZyBob2d5IGV6IGhvZ3kgbmV6IGtpLCBoYSBjc2FrIGEgdHVsZWxva2V0IHZlc3N6dWsgYmVsZToNCmBgYHtyfQ0Kc3Vydml2ZWQgPC0gdHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSxdDQoNCnBsb3QoeCA9IHN1cnZpdmVkJFNleCwgeSA9IHN1cnZpdmVkJEFnZSwNCmNvbCA9ImJsdWUiLCBwY2ggPSAxLCBjZXggPSAxLjUsDQptYWluID0gIlV0YXNvayBrb3IgZWxvc3psw6FzYSBuZW0gc3plcmludCIsDQp4bGFiID0gIiIsDQp5bGFiID0gIktvciINCikNCmBgYA0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0K</div>
 
 
 

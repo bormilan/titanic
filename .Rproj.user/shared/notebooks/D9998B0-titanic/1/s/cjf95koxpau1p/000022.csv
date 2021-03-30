@@ -1,0 +1,6 @@
+"0","plot(x = train$Sex, y = train$Age,"
+"0","col =""blue"", pch = 1, cex = 1.5,"
+"0","main = ""Utasok kor eloszlása nem szerint"","
+"0","xlab = """","
+"0","ylab = ""Kor"""
+"0",")"

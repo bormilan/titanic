@@ -12,15 +12,15 @@
     "path" : null,
     "project_path" : null,
     "properties" : {
-        "cacheKey" : "DE6B3C1F",
+        "cacheKey" : "1871A11B",
         "caption" : "train",
-        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=train&cache_key=DE6B3C1F",
-        "displayedObservations" : 891,
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=train&cache_key=1871A11B",
+        "displayedObservations" : "891",
         "environment" : "",
         "object" : "train",
-        "preview" : 0,
-        "totalObservations" : 891,
-        "variables" : 12
+        "preview" : "0",
+        "totalObservations" : "891",
+        "variables" : "12"
     },
     "relative_order" : 2,
     "source_on_save" : false,

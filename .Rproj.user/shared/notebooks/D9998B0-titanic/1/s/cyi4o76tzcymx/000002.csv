@@ -1,4 +1,4 @@
-"0","temp <- table(train$Survived ==1)"
+"0","temp <- table(train$Survived == 1)"
 "0","pct <- (temp[2] / (temp[1] + temp[2]))*100"
 "0","cat(round(pct,2),""%"")"
 "1","38.38"
