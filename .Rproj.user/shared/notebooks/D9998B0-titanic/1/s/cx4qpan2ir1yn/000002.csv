@@ -1,0 +1,6 @@
+"0","cPct <- sum(survived$Embarked == ""C"") / sum(train$Embarked == ""C"")"
+"0","qPct <- sum(survived$Embarked == ""Q"") / sum(train$Embarked == ""Q"")"
+"0","sPct <- sum(survived$Embarked == ""S"") / sum(train$Embarked == ""S"")"
+"0","allPct <- c(cPct,qPct,sPct)"
+"0","names(allPct) <- c(""C"",""Q"",""S"")"
+"0","barplot(allPct,col = rainbow(25),main=""Túlélési esély indulás szerint"",horiz = T,xlab = ""túlélési esély"",ylab = ""indulási kód"",xlim= c(0,1))"

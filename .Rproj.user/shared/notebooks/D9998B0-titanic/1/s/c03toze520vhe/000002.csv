@@ -1,0 +1,7 @@
+"0","kids <- sum(survived$Age < 10) / sum(train$Age < 10)"
+"0","teenagers <- sum(survived$Age >= 10 & survived$Age < 20) / sum(train$Age >= 10 & train$Age < 20)"
+"0","adults <- sum(survived$Age >= 20 & survived$Age < 50) / sum(train$Age >= 20 & train$Age < 50)"
+"0","elders <- sum(survived$Age >= 50) / sum(survived$Age >= 50)"
+"0","allAges <- c(kids,teenagers,adults,elders)"
+"0","names(allAges) <- c(""(0-9)"",""(10-19)"",""(20-49)"",""(50-)"")"
+"0","barplot(allAges,col = rainbow(25),horiz = T,xlim = c(0,1),main = ""Túlélés esélye kor szerint"",xlab=""Valószínűség"",ylab=""Kor"")"

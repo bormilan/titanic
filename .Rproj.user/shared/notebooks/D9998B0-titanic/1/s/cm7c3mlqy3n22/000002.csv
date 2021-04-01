@@ -1,0 +1,2 @@
+"0","survivedEmbarkTable <- table(survived$Embarked)"
+"0","barplot(survivedEmbarkTable,col = rainbow(25),horiz = T,xlab=""túlélők száma"",ylab=""indulás kódja"",main=""Túlélők száma indulás szerint"")"

@@ -1,2 +1,0 @@
-"0","parchTable <- table(train$Parch)"
-"0","barplot(parchTable,ylab=""szülő vagy gyerekek száma"",xlab=""fők száma"",horiz = T,col= rainbow(25),xlim=c(0,200))"

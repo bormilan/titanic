@@ -244,17 +244,17 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
-<p>Olvassuk be az adatokat:</p>
+<p>#Olvassuk be az adatokat:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHJhaW4gPC0gcmVhZC5jc3YoJ3RyYWluLmNzdicpXG50ZXN0IDwtIHJlYWQuY3N2KCd0ZXN0LmNzdicpXG52YWxpZCA8LSByZWFkLmNzdignZ2VuZGVyX3N1Ym1pc3Npb24uY3N2JylcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHJhaW4gPC0gcmVhZC5jc3YoJ3RyYWluLmNzdicpXG50ZXN0IDwtIHJlYWQuY3N2KCd0ZXN0LmNzdicpXG5yZXN1bHQgPC0gcmVhZC5jc3YoJ2dlbmRlcl9zdWJtaXNzaW9uLmNzdicpXG5gYGAifQ== -->
 <pre class="r"><code>train &lt;- read.csv(&#39;train.csv&#39;)
 test &lt;- read.csv(&#39;test.csv&#39;)
-valid &lt;- read.csv(&#39;gender_submission.csv&#39;)</code></pre>
+result &lt;- read.csv(&#39;gender_submission.csv&#39;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Elemezzuk a tipusaikat es ertekeiket:</p>
+<p>#Elemezzuk a tĂ­pusaikat Ă©s Ă©rtĂ©keiket:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKHRyYWluKVxuc2FwcGx5KHRyYWluLCBmdW5jdGlvbih5KSBzdW0obGVuZ3RoKHdoaWNoKGlzLm5hKHkpKSkpKVxuc2FwcGx5KHRyYWluLCBmdW5jdGlvbih5KSBzdW0obGVuZ3RoKHdoaWNoKHkgPT0gXCJcIikpKSlcbmBgYCJ9 -->
@@ -264,13 +264,11 @@ sapply(train, function(y) sum(length(which(y == &quot;&quot;))))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Tehat az Age oszlopban 177 na ertek van, ezert ezeket a sorokat torolni kell. A Cabin oszlopban pedig 687 ures rekord, ezert az egeszet eldobom, ugyanis igy nem veszem hasznat. Az embarked oszlopban van meg ket ures rekord, ezekbe egyesevel beletoltom az oszlop legtobbszor megjeleno erteket.</p>
+<p>Tehat az Age oszlopban 177 na Ă©rtĂ©k van, ezĂ©rt ezeket a sorokat tĂ¶rĂ¶lni kell. A Cabin oszlopban pedig 687 ĂĽres rekord, ezert az egĂ©szet eldobom, ugyanis igy nem veszem hasznĂˇt. Az embarked oszlopban van mĂ©g kĂ©t ĂĽres rekord, ezekbe egyesĂ©vel beletĂ¶ltĂ¶m az oszlop legtĂ¶bbszor megjelenĹ‘ Ă©rtĂ©kĂ©t.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFja3VwIDwtIHRyYWluXG50cmFpbiA8LSBiYWNrdXBcbnRyYWluIDwtIG5hLm9taXQodHJhaW4pXG5cbnRyYWluJENhYmluIDwtIE5VTExcblxubnVsbHMgPC0gdHJhaW5bdHJhaW4kRW1iYXJrZWQgPT0gXCJcIixdXG50YWJsZSh0cmFpbiRFbWJhcmtlZClcbnRyYWluW3RyYWluJE5hbWUgPT0gXCJJY2FyZCwgTWlzcy4gQW1lbGllXCIsXCJFbWJhcmtlZFwiXSA8LSBcIkNcIlxudHJhaW5bdHJhaW4kTmFtZSA9PSBcIlN0b25lLCBNcnMuIEdlb3JnZSBOZWxzb24gKE1hcnRoYSBFdmVseW4pXCIsXCJFbWJhcmtlZFwiXSA8LSBcIkNcIlxuYGBgIn0= -->
-<pre class="r"><code>backup &lt;- train
-train &lt;- backup
-train &lt;- na.omit(train)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHJhaW4gPC0gbmEub21pdCh0cmFpbilcblxudHJhaW4kQ2FiaW4gPC0gTlVMTFxuXG5udWxscyA8LSB0cmFpblt0cmFpbiRFbWJhcmtlZCA9PSBcIlwiLF1cbnRhYmxlKHRyYWluJEVtYmFya2VkKVxudHJhaW5bdHJhaW4kTmFtZSA9PSBcIkljYXJkLCBNaXNzLiBBbWVsaWVcIixcIkVtYmFya2VkXCJdIDwtIFwiQ1wiXG50cmFpblt0cmFpbiROYW1lID09IFwiU3RvbmUsIE1ycy4gR2VvcmdlIE5lbHNvbiAoTWFydGhhIEV2ZWx5bilcIixcIkVtYmFya2VkXCJdIDwtIFwiQ1wiXG5gYGAifQ== -->
+<pre class="r"><code>train &lt;- na.omit(train)
 
 train$Cabin &lt;- NULL
 
@@ -281,7 +279,7 @@ train[train$Name == &quot;Stone, Mrs. George Nelson (Martha Evelyn)&quot;,&quot;
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Emellett a tablat nezve arra a dontesre jutottam, hogy a Ticket oszlop most nem fog segitseget nyujtani ugyhogy azt elhagyom.</p>
+<p>Emellett a tĂˇblat nĂ©zve arra a dĂ¶ntĂ©sre jutottam, hogy a Ticket oszlop most nem fog segĂ­tseget nyĂşjtani Ăşgyhogy azt elhagyom.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHJhaW4kVGlja2V0IDwtIE5VTExcbmBgYCJ9 -->
@@ -289,7 +287,28 @@ train[train$Name == &quot;Stone, Mrs. George Nelson (Martha Evelyn)&quot;,&quot;
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Nezzuk meg hogy az utasok hany szazaleka elte tul a tanito adathalmazban:</p>
+<p>#Most a test halmazt is tekintsĂĽk ugyanĂ­gy meg:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeSh0ZXN0KVxuc2FwcGx5KHRlc3QsIGZ1bmN0aW9uKHkpIHN1bShsZW5ndGgod2hpY2goaXMubmEoeSkpKSkpXG5zYXBwbHkodGVzdCwgZnVuY3Rpb24oeSkgc3VtKGxlbmd0aCh3aGljaCh5ID09IFwiXCIpKSkpXG5gYGAifQ== -->
+<pre class="r"><code>summary(test)
+sapply(test, function(y) sum(length(which(is.na(y)))))
+sapply(test, function(y) sum(length(which(y == &quot;&quot;))))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Itt azt latjuk hogy az age oszlopban hianyzik 86 ertek. Ez elĂ©g sok ha azt nezzuk hogy 418 sor van alapvetoen a tablaban, de ezekkel a sorokkal sajnos akkor sem tudunk mit csinalni, torolni kell. Illetve a Cabin oszlopot itt is szinten toroljuk, illetve a ticket oszlopot is.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdCA8LSBuYS5vbWl0KHRlc3QpXG5cbnRlc3QkQ2FiaW4gPC0gTlVMTFxudGVzdCRUaWNrZXQgPC0gTlVMTFxuYGBgIn0= -->
+<pre class="r"><code>test &lt;- na.omit(test)
+
+test$Cabin &lt;- NULL
+test$Ticket &lt;- NULL</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>#NĂ©zzĂĽk meg hogy az utasok hĂˇny szĂˇzalĂ©ka Ă©lte tĂşl a tanitĂł adathalmazban:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVtcCA8LSB0YWJsZSh0cmFpbiRTdXJ2aXZlZCA9PSAxKVxucGN0IDwtICh0ZW1wWzJdIC8gKHRlbXBbMV0gKyB0ZW1wWzJdKSkqMTAwXG5jYXQocm91bmQocGN0LDIpLFwiJVwiKVxuYGBgIn0= -->
@@ -299,20 +318,41 @@ cat(round(pct,2),&quot;%&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>nezzuk meg hogy a tulelok hogyan oszlanak meg nemek szerint:</p>
+<p>#nĂ©zzĂĽk meg hogy a tĂşlĂ©lĹ‘k hogyan oszlanak meg nemek szerint:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZl9zZXggPC0gZmFjdG9yKHRyYWluJFNleClcbmZfc3Vydml2ZWQgPC0gZmFjdG9yKHRyYWluJFN1cnZpdmVkKVxubWFsZXMgPC0gbGVuZ3RoKHRyYWluW3RyYWluJFN1cnZpdmVkID09IDEgJiB0cmFpbiRTZXggPT0gXCJtYWxlXCIsXCJOYW1lXCJdKVxuZmVtYWxlcyA8LSBsZW5ndGgodHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSAmIHRyYWluJFNleCA9PSBcImZlbWFsZVwiLFwiTmFtZVwiXSlcbmFsbF9zdXJ2aXZlZCA8LSBtYWxlcyArIGZlbWFsZXNcbmNhdChcIsSC4oCTc3N6ZXNlbiB0xILFn2zEgsKpbHRlOlwiLGFsbF9zdXJ2aXZlZCxcImVtYmVyLCBlYmLEueKAmGxcIixmZW1hbGVzLFwiIG7EueKAmCwgxILCqXNcIixtYWxlcyxcImbEgsKpcmZpXCIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZl9zZXggPC0gZmFjdG9yKHRyYWluJFNleClcbmZfc3Vydml2ZWQgPC0gZmFjdG9yKHRyYWluJFN1cnZpdmVkKVxubWFsZXMgPC0gbGVuZ3RoKHRyYWluW3RyYWluJFN1cnZpdmVkID09IDEgJiB0cmFpbiRTZXggPT0gXCJtYWxlXCIsXCJOYW1lXCJdKVxuZmVtYWxlcyA8LSBsZW5ndGgodHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSAmIHRyYWluJFNleCA9PSBcImZlbWFsZVwiLFwiTmFtZVwiXSlcbmFsbF9zdXJ2aXZlZCA8LSBtYWxlcyArIGZlbWFsZXNcbmNhdChcIsSC4oCTc3N6ZXNlbiB0xILFn2zEgsKpbHRlOlwiLGFsbF9zdXJ2aXZlZCxcImVtYmVyLCBlYmLEueKAmGxcIixmZW1hbGVzLFwiIG7EueKAmCwgxILCqXNcIixtYWxlcyxcImbEgsKpcmZpXCIpXG5cbnN1cnZpdmVkX2JhciA8LSBjKG1hbGVzLGZlbWFsZXMpXG5uYW1lcyhzdXJ2aXZlZF9iYXIpIDwtIGMoXCJtYWxlXCIsXCJmZW1hbGVcIilcblxuYmFycGxvdChzdXJ2aXZlZF9iYXIsaG9yaXogPSBULGNvbCA9IHN1cnZpdmVkX2Jhci8xMCx4bGltPWMoMCwyMDApLG1haW49IFwidMSCxZ9sxILCqWzEueKAmGsgc3rEgsuHbWEgbmVtZWsgc3plcmludFwiKVxuYGBgIn0= -->
 <pre class="r"><code>f_sex &lt;- factor(train$Sex)
 f_survived &lt;- factor(train$Survived)
 males &lt;- length(train[train$Survived == 1 &amp; train$Sex == &quot;male&quot;,&quot;Name&quot;])
 females &lt;- length(train[train$Survived == 1 &amp; train$Sex == &quot;female&quot;,&quot;Name&quot;])
 all_survived &lt;- males + females
-cat(&quot;Ă–sszesen tĂşlĂ©lte:&quot;,all_survived,&quot;ember, ebbĹ‘l&quot;,females,&quot; nĹ‘, Ă©s&quot;,males,&quot;fĂ©rfi&quot;)</code></pre>
+cat(&quot;Ă–sszesen tĂşlĂ©lte:&quot;,all_survived,&quot;ember, ebbĹ‘l&quot;,females,&quot; nĹ‘, Ă©s&quot;,males,&quot;fĂ©rfi&quot;)
+
+survived_bar &lt;- c(males,females)
+names(survived_bar) &lt;- c(&quot;male&quot;,&quot;female&quot;)
+
+barplot(survived_bar,horiz = T,col = survived_bar/10,xlim=c(0,200),main= &quot;tĂşlĂ©lĹ‘k szĂˇma nemek szerint&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Nezzuk meg az emberek korainak eloszlasat:</p>
+<p>LĂˇthatjuk hogy tĂ¶bb mint kĂ©tszerannyi nĹ‘ Ă©lte tĂşl, mint fĂ©rfi.</p>
+<p>#NĂ©zzĂĽk meg ezt szĂˇzalĂ©kos arĂˇnyban is.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmVtYWxlUGN0IDwtIHN1bShzdXJ2aXZlZCRTZXggPT0gXCJmZW1hbGVcIikgLyBzdW0odHJhaW4kU2V4ID09IFwiZmVtYWxlXCIpXG5tYWxlUGN0IDwtIHN1bShzdXJ2aXZlZCRTZXggPT0gXCJtYWxlXCIpIC8gc3VtKHRyYWluJFNleCA9PSBcIm1hbGVcIilcblxuYWxsUGN0IDwtIGMoZmVtYWxlUGN0LG1hbGVQY3QpXG5uYW1lcyhhbGxQY3QpIDwtIGMoXCJmZW1hbGVcIixcIm1hbGVcIilcblxuYmFycGxvdChhbGxQY3QsY29sID0gYWxsUGN0KjEwLGhvcml6ID0gVCx4bGltID0gYygwLDEpLG1haW49XCJUxILFn2zEgsKpbMSCwqlzIGVzxILCqWx5ZSBuZW1layBzemVyaW50XCIpXG5gYGAifQ== -->
+<pre class="r"><code>femalePct &lt;- sum(survived$Sex == &quot;female&quot;) / sum(train$Sex == &quot;female&quot;)
+malePct &lt;- sum(survived$Sex == &quot;male&quot;) / sum(train$Sex == &quot;male&quot;)
+
+allPct &lt;- c(femalePct,malePct)
+names(allPct) &lt;- c(&quot;female&quot;,&quot;male&quot;)
+
+barplot(allPct,col = allPct*10,horiz = T,xlim = c(0,1),main=&quot;TĂşlĂ©lĂ©s esĂ©lye nemek szerint&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Ă“riĂˇsi kĂĽlĂ¶nbsĂ©get tapasztalunk a kĂ©t valĂłszĂ­nĹ±sĂ©gben.</p>
+<p>#NĂ©zzuk meg az emberek korainak eloszlĂˇsĂˇt:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdCh4ID0gdHJhaW4kU2V4LCB5ID0gdHJhaW4kQWdlLFxuY29sID1cImJsdWVcIiwgcGNoID0gMSwgY2V4ID0gMS41LFxubWFpbiA9IFwiVXRhc29rIGtvciBlbG9zemzEgsuHc2EgbmVtIHN6ZXJpbnRcIixcbnhsYWIgPSBcIlwiLFxueWxhYiA9IFwiS29yXCJcbilcbmBgYCJ9 -->
@@ -325,56 +365,152 @@ ylab = &quot;Kor&quot;
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Most nezzuk meg hogy ez hogy nez ki, ha csak a tuleloket vesszuk bele:</p>
+<p>Mint lĂˇthatjuk, javarĂ©szt fiatal felnĹ‘ttek Ă©s kĂ¶zĂ©pkorĂşak utaztak a hajĂłn. Most nezzuk meg hogy ez hogy nez ki, ha csak a tuleloket vesszuk bele:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3Vydml2ZWQgPC0gdHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSxdXG5cbnBsb3QoeCA9IHN1cnZpdmVkJFNleCwgeSA9IHN1cnZpdmVkJEFnZSxcbmNvbCA9XCJibHVlXCIsIHBjaCA9IDEsIGNleCA9IDEuNSxcbm1haW4gPSBcIlV0YXNvayBrb3IgZWxvc3psxILLh3NhIG5lbSBzemVyaW50XCIsXG54bGFiID0gXCJcIixcbnlsYWIgPSBcIktvclwiXG4pXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3Vydml2ZWQgPC0gdHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSxdXG5cbnBsb3QoeCA9IHN1cnZpdmVkJFNleCwgeSA9IHN1cnZpdmVkJEFnZSxcbmNvbCA9XCJibHVlXCIsIHBjaCA9IDEsIGNleCA9IDEuNSxcbm1haW4gPSBcIlTEgsWfbMSCwqlsxLnigJhrIGtvciBlbG9zemzEgsuHc2EgbmVtIHN6ZXJpbnRcIixcbnhsYWIgPSBcIlwiLFxueWxhYiA9IFwiS29yXCJcbilcbmBgYCJ9 -->
 <pre class="r"><code>survived &lt;- train[train$Survived == 1,]
 
 plot(x = survived$Sex, y = survived$Age,
 col =&quot;blue&quot;, pch = 1, cex = 1.5,
-main = &quot;Utasok kor eloszlĂˇsa nem szerint&quot;,
+main = &quot;TĂşlĂ©lĹ‘k kor eloszlĂˇsa nem szerint&quot;,
 xlab = &quot;&quot;,
 ylab = &quot;Kor&quot;
 )</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>most nezzuk meg hogy testverek szerint hogyan oszlanak meg a tulelok:</p>
+<p>#Most nĂ©zzĂĽk meg szĂˇzalĂ©kosan a tĂşlĂ©lĂ©s esĂ©lyĂ©t, korokra lebontva.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2lic2JUYWJsZSA8LSB0YWJsZShzdXJ2aXZlZCRTaWJTcClcbmJhcnBsb3Qoc2lic2JUYWJsZSx5bGFiPVwidGVzdHbEgsKpcmVrIHN6xILLh21hXCIseGxhYj1cImbEueKAmGsgc3rEgsuHbWFcIixob3JpeiA9IFQsY29sPSByYWluYm93KDI1KSx4bGltPWMoMCwyNTApKVxuYGBgIn0= -->
-<pre class="r"><code>sibsbTable &lt;- table(survived$SibSp)
-barplot(sibsbTable,ylab=&quot;testvĂ©rek szĂˇma&quot;,xlab=&quot;fĹ‘k szĂˇma&quot;,horiz = T,col= rainbow(25),xlim=c(0,250))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua2lkcyA8LSBzdW0oc3Vydml2ZWQkQWdlIDwgMTApIC8gc3VtKHRyYWluJEFnZSA8IDEwKVxudGVlbmFnZXJzIDwtIHN1bShzdXJ2aXZlZCRBZ2UgPj0gMTAgJiBzdXJ2aXZlZCRBZ2UgPCAyMCkgLyBzdW0odHJhaW4kQWdlID49IDEwICYgdHJhaW4kQWdlIDwgMjApXG5hZHVsdHMgPC0gc3VtKHN1cnZpdmVkJEFnZSA+PSAyMCAmIHN1cnZpdmVkJEFnZSA8IDUwKSAvIHN1bSh0cmFpbiRBZ2UgPj0gMjAgJiB0cmFpbiRBZ2UgPCA1MClcbmVsZGVycyA8LSBzdW0oc3Vydml2ZWQkQWdlID49IDUwKSAvIHN1bShzdXJ2aXZlZCRBZ2UgPj0gNTApXG5cbmFsbEFnZXMgPC0gYyhraWRzLHRlZW5hZ2VycyxhZHVsdHMsZWxkZXJzKVxubmFtZXMoYWxsQWdlcykgPC0gYyhcIigwLTkpXCIsXCIoMTAtMTkpXCIsXCIoMjAtNDkpXCIsXCIoNTAtKVwiKVxuXG5iYXJwbG90KGFsbEFnZXMsY29sID0gcmFpbmJvdygyNSksaG9yaXogPSBULHhsaW0gPSBjKDAsMSksbWFpbiA9IFwiVMSCxZ9sxILCqWzEgsKpcyBlc8SCwqlseWUga29yIHN6ZXJpbnRcIix4bGFiPVwiVmFsxILFgnN6xILCrW7EucKxc8SCwqlnXCIseWxhYj1cIktvclwiKVxuYGBgIn0= -->
+<pre class="r"><code>kids &lt;- sum(survived$Age &lt; 10) / sum(train$Age &lt; 10)
+teenagers &lt;- sum(survived$Age &gt;= 10 &amp; survived$Age &lt; 20) / sum(train$Age &gt;= 10 &amp; train$Age &lt; 20)
+adults &lt;- sum(survived$Age &gt;= 20 &amp; survived$Age &lt; 50) / sum(train$Age &gt;= 20 &amp; train$Age &lt; 50)
+elders &lt;- sum(survived$Age &gt;= 50) / sum(survived$Age &gt;= 50)
+
+allAges &lt;- c(kids,teenagers,adults,elders)
+names(allAges) &lt;- c(&quot;(0-9)&quot;,&quot;(10-19)&quot;,&quot;(20-49)&quot;,&quot;(50-)&quot;)
+
+barplot(allAges,col = rainbow(25),horiz = T,xlim = c(0,1),main = &quot;TĂşlĂ©lĂ©s esĂ©lye kor szerint&quot;,xlab=&quot;ValĂłszĂ­nĹ±sĂ©g&quot;,ylab=&quot;Kor&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Ebbol lathatjuk hogy nem sokan erkeztek a testverukkel a hajora, az utasok nagytobbsege vagy egyaltalan nem vagy csak egy testverrel erkezett.</p>
-<p>EzutĂˇn azt is erdekes megfigyelni hogy hanyan erkeztek gyermekkel vagy szulovel:</p>
+<p>Nagyon Ă©rdekes informĂˇciĂłt olvashatunk le errĹ‘l a diagrammrĂłl. ElĹ‘szĂ¶ris, az 50+ kategĂłriĂˇba tartozĂł utasok 100%-os esĂ©llyel tĂşlĂ©ltĂ©k a katasztrĂłfĂˇt, viszont a 10 alattiak csak ~60%-os esĂ©llyel, ami szomorĂş, arrĂłl nem is ebszĂ©lve hogy a fiatal felnĹ‘ttek Ă©s kĂ¶zĂ©pkorĂşak, csak ~40%-os esĂ©llyel.</p>
+<p>#Most nĂ©zzĂĽk meg hogy testvĂ©rek szerint hogyan oszlanak meg az utasok:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFyY2hUYWJsZSA8LSB0YWJsZShzdXJ2aXZlZCRQYXJjaClcbmJhcnBsb3QocGFyY2hUYWJsZSx5bGFiPVwic3rEgsS9bMS54oCYIHZhZ3kgZ3llcmVrZWsgc3rEgsuHbWFcIix4bGFiPVwiZsS54oCYayBzesSCy4dtYVwiLGhvcml6ID0gVCxjb2w9IHJhaW5ib3coMjUpLHhsaW09YygwLDI1MCkpXG5gYGAifQ== -->
-<pre class="r"><code>parchTable &lt;- table(survived$Parch)
-barplot(parchTable,ylab=&quot;szĂĽlĹ‘ vagy gyerekek szĂˇma&quot;,xlab=&quot;fĹ‘k szĂˇma&quot;,horiz = T,col= rainbow(25),xlim=c(0,250))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2lic2JUYWJsZSA8LSB0YWJsZSh0cmFpbiRTaWJTcClcbmJhcnBsb3Qoc2lic2JUYWJsZSx5bGFiPVwidGVzdHbEgsKpcmVrIHN6xILLh21hXCIseGxhYj1cImbEueKAmGsgc3rEgsuHbWFcIixob3JpeiA9IFQsY29sPSByYWluYm93KDI1KSx4bGltPWMoMCwyMDApLG1haW49XCJVdGFzb2sgc3rEgsuHbWEgdGVzdHbEgsKpcmVrIHN6xILLh21hIHN6ZXJpbnRcIilcbmBgYCJ9 -->
+<pre class="r"><code>sibsbTable &lt;- table(train$SibSp)
+barplot(sibsbTable,ylab=&quot;testvĂ©rek szĂˇma&quot;,xlab=&quot;fĹ‘k szĂˇma&quot;,horiz = T,col= rainbow(25),xlim=c(0,200),main=&quot;Utasok szĂˇma testvĂ©rek szĂˇma szerint&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Erdekes hogy van egy eset ahol 5 gyermek/szulo is jott az utassal, viszont nagyreszt itt is az utasok vagy egyaltalan nem vagy csak egy szulo/gyermek-et hoztak magukkal.</p>
-<p>Ezutan nezzunk meg egy kicsit erdekesebb osszefuggest is, megpedig hogy osztalyok szerint milyen eloszlasban eltek tul az utasok:</p>
+<p>EbbĹ‘l lĂˇthatjuk hogy a legtĂ¶bben vagy egyĂˇltalĂˇn nem, vagy csak egy testvĂ©rt hoztak az Ăştra.</p>
+<p>#EzutĂˇn azt is erdekes megfigyelni hogy hĂˇnyan Ă©rkeztek gyermekkel vagy szĂĽlĹ‘vel:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGNsYXNzVGFibGUgPC0gdGFibGUoc3Vydml2ZWQkUGNsYXNzKVxucGNsYXNzVGFibGVcbm1heChwY2xhc3NUYWJsZSlcbmJhcnBsb3QocGNsYXNzVGFibGUseGxhYj1cImbEueKAmGsgc3rEgsuHbWFcIiwgeWxhYj1cIm9zenTEgsuHbHlva1wiLGNvbD1yYWluYm93KDI1KSxob3JpeiA9IFQseGxpbT1jKDAsMTUwKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFyY2hUYWJsZSA8LSB0YWJsZSh0cmFpbiRQYXJjaClcbmJhcnBsb3QocGFyY2hUYWJsZSx5bGFiPVwic3rEgsS9bMS54oCYIHZhZ3kgZ3llcmVrZWsgc3rEgsuHbWFcIix4bGFiPVwiZsS54oCYayBzesSCy4dtYVwiLGhvcml6ID0gVCxjb2w9IHJhaW5ib3coMjUpLHhsaW09YygwLDIwMCksbWFpbiA9IFwiVXRhc29rIHN6xILLh21hLCBneWVyZWtlay9zesSCxL1sxLnigJhrIHN6xILLh21hIHN6ZXJpbnQgY3NvcG9ydG9zxILCrXR2YVwiKVxuYGBgIn0= -->
+<pre class="r"><code>parchTable &lt;- table(train$Parch)
+barplot(parchTable,ylab=&quot;szĂĽlĹ‘ vagy gyerekek szĂˇma&quot;,xlab=&quot;fĹ‘k szĂˇma&quot;,horiz = T,col= rainbow(25),xlim=c(0,200),main = &quot;Utasok szĂˇma, gyerekek/szĂĽlĹ‘k szĂˇma szerint csoportosĂ­tva&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Ă‰rdekes hogy van egy eset ahol 6 gyermek/szĂĽlĹ‘ is jĂ¶tt az utassal, viszont nagyrĂ©szt itt is az utasok vagy egyĂˇltalĂˇn nem vagy csak egy szĂĽlĹ‘/gyermek-et hoztak magukkal. Itt tĂ¶bben vannak olyanok is akik kettĹ‘vel, viszont a tĂ¶bbi nagyon elenyeszĹ‘.</p>
+<p>#Most nĂ©zzĂĽk meg hogy undulĂˇs szerint hogyan oszlanak meg az utasok:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZW1iYXJrVGFibGUgPC0gdGFibGUodHJhaW4kRW1iYXJrZWQpXG5iYXJwbG90KGVtYmFya1RhYmxlLGhvcml6ID0gVCx4bGFiPVwiZsS54oCYayBzesSCy4dtYVwiLHlsYWI9XCJiZXN6xILLh2xsxILLh3Mga8SCxYJkamFcIixjb2wgPSByYWluYm93KDI1KSxtYWluPVwiVXRhc29rIHN6xILLh21hIGluZHVsxILLh3Mgc3plcmludFwiKVxuYGBgIn0= -->
+<pre class="r"><code>embarkTable &lt;- table(train$Embarked)
+barplot(embarkTable,horiz = T,xlab=&quot;fĹ‘k szĂˇma&quot;,ylab=&quot;beszĂˇllĂˇs kĂłdja&quot;,col = rainbow(25),main=&quot;Utasok szĂˇma indulĂˇs szerint&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>#Most ugyanezt a tĂşlĂ©lĹ‘kre:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3Vydml2ZWRFbWJhcmtUYWJsZSA8LSB0YWJsZShzdXJ2aXZlZCRFbWJhcmtlZClcbmJhcnBsb3Qoc3Vydml2ZWRFbWJhcmtUYWJsZSxjb2wgPSByYWluYm93KDI1KSxob3JpeiA9IFQseGxhYj1cInTEgsWfbMSCwqlsxLnigJhrIHN6xILLh21hXCIseWxhYj1cImluZHVsxILLh3Mga8SCxYJkamFcIixtYWluPVwiVMSCxZ9sxILCqWzEueKAmGsgc3rEgsuHbWEgaW5kdWzEgsuHcyBzemVyaW50XCIpXG5gYGAifQ== -->
+<pre class="r"><code>survivedEmbarkTable &lt;- table(survived$Embarked)
+barplot(survivedEmbarkTable,col = rainbow(25),horiz = T,xlab=&quot;tĂşlĂ©lĹ‘k szĂˇma&quot;,ylab=&quot;indulĂˇs kĂłdja&quot;,main=&quot;TĂşlĂ©lĹ‘k szĂˇma indulĂˇs szerint&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>LĂˇthatjuk hogy arĂˇnyaiban szinte semmi vĂˇltozĂˇs nincs, csak a fĹ‘k szĂˇmĂˇban.</p>
+<p>#Most nĂ©zzĂĽk meg hogy az indulĂˇsi kĂłdok mennyire befolyĂˇsoltĂˇk a tĂşlĂ©lĂ©s esĂ©lyĂ©t</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY1BjdCA8LSBzdW0oc3Vydml2ZWQkRW1iYXJrZWQgPT0gXCJDXCIpIC8gc3VtKHRyYWluJEVtYmFya2VkID09IFwiQ1wiKVxucVBjdCA8LSBzdW0oc3Vydml2ZWQkRW1iYXJrZWQgPT0gXCJRXCIpIC8gc3VtKHRyYWluJEVtYmFya2VkID09IFwiUVwiKVxuc1BjdCA8LSBzdW0oc3Vydml2ZWQkRW1iYXJrZWQgPT0gXCJTXCIpIC8gc3VtKHRyYWluJEVtYmFya2VkID09IFwiU1wiKVxuXG5hbGxQY3QgPC0gYyhjUGN0LHFQY3Qsc1BjdClcbm5hbWVzKGFsbFBjdCkgPC0gYyhcIkNcIixcIlFcIixcIlNcIilcblxuYmFycGxvdChhbGxQY3QsY29sID0gcmFpbmJvdygyNSksbWFpbj1cIlTEgsWfbMSCwqlsxILCqXNpIGVzxILCqWx5IGluZHVsxILLh3Mgc3plcmludFwiLGhvcml6ID0gVCx4bGFiID0gXCJ0xILFn2zEgsKpbMSCwqlzaSBlc8SCwqlseVwiLHlsYWIgPSBcImluZHVsxILLh3NpIGvEgsWCZFwiLHhsaW09IGMoMCwxKSlcbmBgYCJ9 -->
+<pre class="r"><code>cPct &lt;- sum(survived$Embarked == &quot;C&quot;) / sum(train$Embarked == &quot;C&quot;)
+qPct &lt;- sum(survived$Embarked == &quot;Q&quot;) / sum(train$Embarked == &quot;Q&quot;)
+sPct &lt;- sum(survived$Embarked == &quot;S&quot;) / sum(train$Embarked == &quot;S&quot;)
+
+allPct &lt;- c(cPct,qPct,sPct)
+names(allPct) &lt;- c(&quot;C&quot;,&quot;Q&quot;,&quot;S&quot;)
+
+barplot(allPct,col = rainbow(25),main=&quot;TĂşlĂ©lĂ©si esĂ©ly indulĂˇs szerint&quot;,horiz = T,xlab = &quot;tĂşlĂ©lĂ©si esĂ©ly&quot;,ylab = &quot;indulĂˇsi kĂłd&quot;,xlim= c(0,1))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>ĂŤgy mostmĂˇr lĂˇthatjuk hogy a C indulĂˇsi kĂłddal rendelkezĹ‘k nagyobb esĂ©llyel Ă©ltĂ©k tĂşl.</p>
+<p>#Ezutan nezzunk meg egy kicsit erdekesebb osszefuggest is, megpedig hogy osztalyok szerint milyen eloszlasban eltek tul az utasok:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGNsYXNzVGFibGUgPC0gdGFibGUoc3Vydml2ZWQkUGNsYXNzKVxuYmFycGxvdChwY2xhc3NUYWJsZSx4bGFiPVwiZsS54oCYayBzesSCy4dtYVwiLCB5bGFiPVwib3N6dMSCy4dseW9rXCIsY29sPXJhaW5ib3coMjUpLGhvcml6ID0gVCxtYWluID0gXCJUxILFn2zEgsKpbMS54oCYayBzesSCy4dtYSBvc3p0xILLh2x5b2sgc3plcmludFwiKVxuYGBgIn0= -->
 <pre class="r"><code>pclassTable &lt;- table(survived$Pclass)
-pclassTable
-max(pclassTable)
-barplot(pclassTable,xlab=&quot;fĹ‘k szĂˇma&quot;, ylab=&quot;osztĂˇlyok&quot;,col=rainbow(25),horiz = T,xlim=c(0,150))</code></pre>
+barplot(pclassTable,xlab=&quot;fĹ‘k szĂˇma&quot;, ylab=&quot;osztĂˇlyok&quot;,col=rainbow(25),horiz = T,main = &quot;TĂşlĂ©lĹ‘k szĂˇma osztĂˇlyok szerint&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Erdekes latni hogy masod osztalyon utazokent lenyegesen kevesebb eselye volt az embernek tulelni a katasztrofat mint a masik ket osztalyon, illetve elso osztalyon utazokent a legjobb eselyben reszesulhettek az emberek.</p>
+<p>Ă‰rdekes lĂˇtni hogy elso osztalyon utazokent sokkal nagyobb esellyel eltek tul az emberek, Ă©s hogy a masodik es harmadik osztalyon ugyanannyian vannak nagysagrendileg a tulelok.</p>
+<p>#Ezutan azt is erdekes lenne megtekinteni hogy szazalekos aranyban hogy nez ki a tulelok aranya, osztalyok szerint:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYzFwY3QgPC0gKHN1bShzdXJ2aXZlZCRQY2xhc3MgPT0gMSkgLyBzdW0odHJhaW4kUGNsYXNzID09IDEpKVxuYzJwY3QgPC0gKHN1bShzdXJ2aXZlZCRQY2xhc3MgPT0gMikgLyBzdW0odHJhaW4kUGNsYXNzID09IDIpKVxuYzNwY3QgPC0gKHN1bShzdXJ2aXZlZCRQY2xhc3MgPT0gMykgLyBzdW0odHJhaW4kUGNsYXNzID09IDMpKVxuYWxsUGN0IDwtIGMoYzFwY3QsYzJwY3QsYzNwY3QpXG5uYW1lcyhhbGxQY3QpIDwtIGMoMSwyLDMpXG5iYXJwbG90KGFsbFBjdCx4bGltPWMoMCwxKSxob3JpeiA9IFQsY29sID0gcmFpbmJvdygyNSkseGxhYiA9IFwiVMSCxZ9sxILCqWzEgsKpcyBlc8SCwqlseWVcIix5bGFiID0gXCJPc3p0xILLh2x5b2sgc3rEgsuHbWFcIiwgbWFpbiA9IFwiVMSCxZ9sxILCqWzEgsKpcyBlc8SCwqlseWUgb3N6dMSCy4dseW9rIHN6ZXJpbnRcIilcbmBgYCJ9 -->
+<pre class="r"><code>c1pct &lt;- (sum(survived$Pclass == 1) / sum(train$Pclass == 1))
+c2pct &lt;- (sum(survived$Pclass == 2) / sum(train$Pclass == 2))
+c3pct &lt;- (sum(survived$Pclass == 3) / sum(train$Pclass == 3))
+allPct &lt;- c(c1pct,c2pct,c3pct)
+names(allPct) &lt;- c(1,2,3)
+barplot(allPct,xlim=c(0,1),horiz = T,col = rainbow(25),xlab = &quot;TĂşlĂ©lĂ©s esĂ©lye&quot;,ylab = &quot;OsztĂˇlyok szĂˇma&quot;, main = &quot;TĂşlĂ©lĂ©s esĂ©lye osztĂˇlyok szerint&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>SzĂˇzalĂ©kosan nĂ©zve az arĂˇnyokat viszont nagyon lĂˇtszik, hogy minĂ©l alacsonyabb osztĂˇlyon utazott az utas, annĂˇl kevesebb esĂ©lye volt tĂşlĂ©lni a katasztrĂłfĂˇt.</p>
+<p>#Most nĂ©zzĂĽk meg a korrelĂˇciĂłkat, a kĂĽlĂ¶nbĂ¶zĹ‘ attribĂştumok kĂ¶zĂ¶tt:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>#KonklĂşziĂłk a predikciĂł elĹ‘tt: -az utasok neme nagyon fontos adat, ugyanis szĂˇmban Ă©s arĂˇnyaiban is sokkal tĂ¶bb nĹ‘ Ă©lte tĂşl mint fĂ©rfi -az utasok kora is fontos tĂ©nyezĹ‘, ugyanis az 50+ kĂłrĂşak szinte 100%-osan tĂşlĂ©ltĂ©k, mĂ­g a fiatal Ă©s kĂ¶zĂ©p korĂşak csak ~40%-ban. -az indulĂˇs azĂ©rt fontos tĂ©nyezĹ‘, mert az egyik indulĂˇsi kĂłd kiemelkedĹ‘ tĂşlĂ©lĂ©si esĂ©lyt mutat -az osztĂˇlyok nagyon befojĂˇsolĂłak, hiszem az elsĹ‘ osztĂˇlyon tĂ¶bb mint 60% a tĂşlĂ©lĂ©si esĂ©ly, mĂ©g a harmadikon csak kicsit tĂ¶bb mint 20%, majdnem a fele.</p>
+<p>#Most kĂ©szĂ­tsĂĽnk egy regressziĂłs modellt, binomiĂˇlis prediktorral:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHJhaW4kUGNsYXNzIDwtIGFzLmZhY3Rvcih0cmFpbiRQY2xhc3MpXG5tb2RlbCA8LSBnbG0oU3Vydml2ZWQgfiBBZ2UgKyBTZXggKyBQY2xhc3MgKyBFbWJhcmtlZCwgZGF0YSA9IHRyYWluLCBmYW1pbHkgPSBcImJpbm9taWFsXCIpXG5zdW1tYXJ5KG1vZGVsKVxuYGBgIn0= -->
+<pre class="r"><code>train$Pclass &lt;- as.factor(train$Pclass)
+model &lt;- glm(Survived ~ Age + Sex + Pclass + Embarked, data = train, family = &quot;binomial&quot;)
+summary(model)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>#EbbĹ‘l leolvashatjuk: -az age attribĂştum 0,03-al rontja az utas tĂşlĂ©lĂ©si esĂ©lyĂ©t(tehĂˇt ha valaki egy Ă©vvel idĹ‘sebb mint a mĂˇsik, akkor 0,03-al kevesebb az esĂ©lye a tĂşlĂ©lĂ©sre) -a nemeknĂ©l ha az utas fĂ©rfi, akkor 2.52-vel romlik az esĂ©lye -a pclass-nĂˇl 1,14-el romlik az esĂ©ly, ha valaki mĂˇsod osztĂˇlyon utazott, illetve 2,41-el, ha harmad osztĂˇlyon</p>
+<p>#Most nĂ©zzĂĽk meg hogy milyen eredmĂ©nyt kapunk a tesztadatokra</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdCRQY2xhc3MgPC0gYXMuZmFjdG9yKHRlc3QkUGNsYXNzKVxucHJlZCA8LSBwcmVkaWN0KG1vZGVsLG5ld2RhdGEgPSB0ZXN0KVxuXG50ZXN0U3Vydml2ZWQgPC0gcHJlZCA+IDFcbnRlc3RQcmVkIDwtIGRhdGEuZnJhbWUoUGFzc2VuZ2VySWQgPSB0ZXN0JFBhc3NlbmdlcklkLFN1cnZpdmVkID0gdGVzdFN1cnZpdmVkKVxudGVzdFByZWQkU3Vydml2ZWQgPC0gZmFjdG9yKHRlc3RQcmVkJFN1cnZpdmVkLGMoRkFMU0UsVFJVRSksYygnMCcsJzEnKSlcbnN1bSh0ZXN0UHJlZCRTdXJ2aXZlZCA9PSAnMScpIC8gbGVuZ3RoKHRlc3RQcmVkJFBhc3NlbmdlcklkKVxuYGBgIn0= -->
+<pre class="r"><code>test$Pclass &lt;- as.factor(test$Pclass)
+pred &lt;- predict(model,newdata = test)
+
+testSurvived &lt;- pred &gt; 1
+testPred &lt;- data.frame(PassengerId = test$PassengerId,Survived = testSurvived)
+testPred$Survived &lt;- factor(testPred$Survived,c(FALSE,TRUE),c(&#39;0&#39;,&#39;1&#39;))
+sum(testPred$Survived == &#39;1&#39;) / length(testPred$PassengerId)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Egy 24,7%-os eredmĂ©nyt kaptunk, ami nem tĂşl jĂł.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRpdGFuaWMgVGVtYWxhYm9yIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KT2x2YXNzdWsgYmUgYXogYWRhdG9rYXQ6DQpgYGB7cn0NCnRyYWluIDwtIHJlYWQuY3N2KCd0cmFpbi5jc3YnKQ0KdGVzdCA8LSByZWFkLmNzdigndGVzdC5jc3YnKQ0KdmFsaWQgPC0gcmVhZC5jc3YoJ2dlbmRlcl9zdWJtaXNzaW9uLmNzdicpDQpgYGANCg0KRWxlbWV6enVrIGEgdGlwdXNhaWthdCBlcyBlcnRla2Vpa2V0Og0KYGBge3J9DQpzdHIodHJhaW4pDQpzYXBwbHkodHJhaW4sIGZ1bmN0aW9uKHkpIHN1bShsZW5ndGgod2hpY2goaXMubmEoeSkpKSkpDQpzYXBwbHkodHJhaW4sIGZ1bmN0aW9uKHkpIHN1bShsZW5ndGgod2hpY2goeSA9PSAiIikpKSkNCmBgYA0KVGVoYXQgYXogQWdlIG9zemxvcGJhbiAxNzcgbmEgZXJ0ZWsgdmFuLCBlemVydCBlemVrZXQgYSBzb3Jva2F0IHRvcm9sbmkga2VsbC4NCkEgQ2FiaW4gb3N6bG9wYmFuIHBlZGlnIDY4NyB1cmVzIHJla29yZCwgZXplcnQgYXogZWdlc3pldCBlbGRvYm9tLCB1Z3lhbmlzIGlneSBuZW0gdmVzemVtIGhhc3puYXQuDQpBeiBlbWJhcmtlZCBvc3psb3BiYW4gdmFuIG1lZyBrZXQgdXJlcyByZWtvcmQsIGV6ZWtiZSBlZ3llc2V2ZWwgYmVsZXRvbHRvbSBheiBvc3psb3AgbGVndG9iYnN6b3IgbWVnamVsZW5vIGVydGVrZXQuDQoNCmBgYHtyfQ0KYmFja3VwIDwtIHRyYWluDQp0cmFpbiA8LSBiYWNrdXANCnRyYWluIDwtIG5hLm9taXQodHJhaW4pDQoNCnRyYWluJENhYmluIDwtIE5VTEwNCg0KbnVsbHMgPC0gdHJhaW5bdHJhaW4kRW1iYXJrZWQgPT0gIiIsXQ0KdGFibGUodHJhaW4kRW1iYXJrZWQpDQp0cmFpblt0cmFpbiROYW1lID09ICJJY2FyZCwgTWlzcy4gQW1lbGllIiwiRW1iYXJrZWQiXSA8LSAiQyINCnRyYWluW3RyYWluJE5hbWUgPT0gIlN0b25lLCBNcnMuIEdlb3JnZSBOZWxzb24gKE1hcnRoYSBFdmVseW4pIiwiRW1iYXJrZWQiXSA8LSAiQyINCmBgYA0KRW1lbGxldHQgYSB0YWJsYXQgbmV6dmUgYXJyYSBhIGRvbnRlc3JlIGp1dG90dGFtLCBob2d5IGEgVGlja2V0IG9zemxvcCBtb3N0IG5lbSBmb2cgc2VnaXRzZWdldCBueXVqdGFuaSB1Z3lob2d5IGF6dCBlbGhhZ3lvbS4NCmBgYHtyfQ0KdHJhaW4kVGlja2V0IDwtIE5VTEwNCmBgYA0KDQoNCk5lenp1ayBtZWcgaG9neSBheiB1dGFzb2sgaGFueSBzemF6YWxla2EgZWx0ZSB0dWwgYSB0YW5pdG8gYWRhdGhhbG1hemJhbjoNCmBgYHtyfQ0KdGVtcCA8LSB0YWJsZSh0cmFpbiRTdXJ2aXZlZCA9PSAxKQ0KcGN0IDwtICh0ZW1wWzJdIC8gKHRlbXBbMV0gKyB0ZW1wWzJdKSkqMTAwDQpjYXQocm91bmQocGN0LDIpLCIlIikNCmBgYA0KbmV6enVrIG1lZyBob2d5IGEgdHVsZWxvayBob2d5YW4gb3N6bGFuYWsgbWVnIG5lbWVrIHN6ZXJpbnQ6DQpgYGB7cn0NCmZfc2V4IDwtIGZhY3Rvcih0cmFpbiRTZXgpDQpmX3N1cnZpdmVkIDwtIGZhY3Rvcih0cmFpbiRTdXJ2aXZlZCkNCm1hbGVzIDwtIGxlbmd0aCh0cmFpblt0cmFpbiRTdXJ2aXZlZCA9PSAxICYgdHJhaW4kU2V4ID09ICJtYWxlIiwiTmFtZSJdKQ0KZmVtYWxlcyA8LSBsZW5ndGgodHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSAmIHRyYWluJFNleCA9PSAiZmVtYWxlIiwiTmFtZSJdKQ0KYWxsX3N1cnZpdmVkIDwtIG1hbGVzICsgZmVtYWxlcw0KY2F0KCLDlnNzemVzZW4gdMO6bMOpbHRlOiIsYWxsX3N1cnZpdmVkLCJlbWJlciwgZWJixZFsIixmZW1hbGVzLCIgbsWRLCDDqXMiLG1hbGVzLCJmw6lyZmkiKQ0KYGBgDQoNCk5lenp1ayBtZWcgYXogZW1iZXJlayBrb3JhaW5hayBlbG9zemxhc2F0Og0KYGBge3J9DQpwbG90KHggPSB0cmFpbiRTZXgsIHkgPSB0cmFpbiRBZ2UsDQpjb2wgPSJibHVlIiwgcGNoID0gMSwgY2V4ID0gMS41LA0KbWFpbiA9ICJVdGFzb2sga29yIGVsb3N6bMOhc2EgbmVtIHN6ZXJpbnQiLA0KeGxhYiA9ICIiLA0KeWxhYiA9ICJLb3IiDQopDQpgYGANCk1vc3QgbmV6enVrIG1lZyBob2d5IGV6IGhvZ3kgbmV6IGtpLCBoYSBjc2FrIGEgdHVsZWxva2V0IHZlc3N6dWsgYmVsZToNCmBgYHtyfQ0Kc3Vydml2ZWQgPC0gdHJhaW5bdHJhaW4kU3Vydml2ZWQgPT0gMSxdDQoNCnBsb3QoeCA9IHN1cnZpdmVkJFNleCwgeSA9IHN1cnZpdmVkJEFnZSwNCmNvbCA9ImJsdWUiLCBwY2ggPSAxLCBjZXggPSAxLjUsDQptYWluID0gIlV0YXNvayBrb3IgZWxvc3psw6FzYSBuZW0gc3plcmludCIsDQp4bGFiID0gIiIsDQp5bGFiID0gIktvciINCikNCmBgYA0KDQptb3N0IG5lenp1ayBtZWcgaG9neSB0ZXN0dmVyZWsgc3plcmludCBob2d5YW4gb3N6bGFuYWsgbWVnIGEgdHVsZWxvazoNCmBgYHtyfQ0Kc2lic2JUYWJsZSA8LSB0YWJsZShzdXJ2aXZlZCRTaWJTcCkNCmJhcnBsb3Qoc2lic2JUYWJsZSx5bGFiPSJ0ZXN0dsOpcmVrIHN6w6FtYSIseGxhYj0iZsWRayBzesOhbWEiLGhvcml6ID0gVCxjb2w9IHJhaW5ib3coMjUpLHhsaW09YygwLDI1MCkpDQpgYGANCg0KRWJib2wgbGF0aGF0anVrIGhvZ3kgbmVtIHNva2FuIGVya2V6dGVrIGEgdGVzdHZlcnVra2VsIGEgaGFqb3JhLCBheiB1dGFzb2sgbmFneXRvYmJzZWdlIHZhZ3kgZWd5YWx0YWxhbiBuZW0gdmFneSBjc2FrIGVneSB0ZXN0dmVycmVsIGVya2V6ZXR0Lg0KDQpFenV0w6FuIGF6dCBpcyBlcmRla2VzIG1lZ2ZpZ3llbG5pIGhvZ3kgaGFueWFuIGVya2V6dGVrIGd5ZXJtZWtrZWwgdmFneSBzenVsb3ZlbDoNCmBgYHtyfQ0KcGFyY2hUYWJsZSA8LSB0YWJsZShzdXJ2aXZlZCRQYXJjaCkNCmJhcnBsb3QocGFyY2hUYWJsZSx5bGFiPSJzesO8bMWRIHZhZ3kgZ3llcmVrZWsgc3rDoW1hIix4bGFiPSJmxZFrIHN6w6FtYSIsaG9yaXogPSBULGNvbD0gcmFpbmJvdygyNSkseGxpbT1jKDAsMjUwKSkNCmBgYA0KRXJkZWtlcyBob2d5IHZhbiBlZ3kgZXNldCBhaG9sIDUgZ3llcm1lay9zenVsbyBpcyBqb3R0IGF6IHV0YXNzYWwsIHZpc3pvbnQgbmFneXJlc3p0IGl0dCBpcyBheiB1dGFzb2sgdmFneSBlZ3lhbHRhbGFuIG5lbSB2YWd5IGNzYWsgZWd5IHN6dWxvL2d5ZXJtZWstZXQgaG96dGFrIG1hZ3Vra2FsLg0KDQpFenV0YW4gbmV6enVuayBtZWcgZWd5IGtpY3NpdCBlcmRla2VzZWJiIG9zc3plZnVnZ2VzdCBpcywgbWVncGVkaWcgaG9neSBvc3p0YWx5b2sgc3plcmludCBtaWx5ZW4gZWxvc3psYXNiYW4gZWx0ZWsgdHVsIGF6IHV0YXNvazoNCmBgYHtyfQ0KcGNsYXNzVGFibGUgPC0gdGFibGUoc3Vydml2ZWQkUGNsYXNzKQ0KcGNsYXNzVGFibGUNCm1heChwY2xhc3NUYWJsZSkNCmJhcnBsb3QocGNsYXNzVGFibGUseGxhYj0iZsWRayBzesOhbWEiLCB5bGFiPSJvc3p0w6FseW9rIixjb2w9cmFpbmJvdygyNSksaG9yaXogPSBULHhsaW09YygwLDE1MCkpDQpgYGANCg0KRXJkZWtlcyBsYXRuaSBob2d5IG1hc29kIG9zenRhbHlvbiB1dGF6b2tlbnQgbGVueWVnZXNlbiBrZXZlc2ViYiBlc2VseWUgdm9sdCBheiBlbWJlcm5layB0dWxlbG5pIGEga2F0YXN6dHJvZmF0IG1pbnQgYSBtYXNpayBrZXQgb3N6dGFseW9uLCBpbGxldHZlIGVsc28gb3N6dGFseW9uIHV0YXpva2VudCBhIGxlZ2pvYmIgZXNlbHliZW4gcmVzemVzdWxoZXR0ZWsgYXogZW1iZXJlay4NCg0KDQoNCg0KDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRpdGFuaWMgVGVtYWxhYm9yIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KI09sdmFzc3VrIGJlIGF6IGFkYXRva2F0Og0KYGBge3J9DQp0cmFpbiA8LSByZWFkLmNzdigndHJhaW4uY3N2JykNCnRlc3QgPC0gcmVhZC5jc3YoJ3Rlc3QuY3N2JykNCnJlc3VsdCA8LSByZWFkLmNzdignZ2VuZGVyX3N1Ym1pc3Npb24uY3N2JykNCmBgYA0KDQojRWxlbWV6enVrIGEgdMOtcHVzYWlrYXQgw6lzIMOpcnTDqWtlaWtldDoNCmBgYHtyfQ0Kc3RyKHRyYWluKQ0Kc2FwcGx5KHRyYWluLCBmdW5jdGlvbih5KSBzdW0obGVuZ3RoKHdoaWNoKGlzLm5hKHkpKSkpKQ0Kc2FwcGx5KHRyYWluLCBmdW5jdGlvbih5KSBzdW0obGVuZ3RoKHdoaWNoKHkgPT0gIiIpKSkpDQpgYGANClRlaGF0IGF6IEFnZSBvc3psb3BiYW4gMTc3IG5hIMOpcnTDqWsgdmFuLCBlesOpcnQgZXpla2V0IGEgc29yb2thdCB0w7Zyw7Zsbmkga2VsbC4NCkEgQ2FiaW4gb3N6bG9wYmFuIHBlZGlnIDY4NyDDvHJlcyByZWtvcmQsIGV6ZXJ0IGF6IGVnw6lzemV0IGVsZG9ib20sIHVneWFuaXMgaWd5IG5lbSB2ZXN6ZW0gaGFzem7DoXQuDQpBeiBlbWJhcmtlZCBvc3psb3BiYW4gdmFuIG3DqWcga8OpdCDDvHJlcyByZWtvcmQsIGV6ZWtiZSBlZ3llc8OpdmVsIGJlbGV0w7ZsdMO2bSBheiBvc3psb3AgbGVndMO2YmJzem9yIG1lZ2plbGVuxZEgw6lydMOpa8OpdC4NCg0KYGBge3J9DQp0cmFpbiA8LSBuYS5vbWl0KHRyYWluKQ0KDQp0cmFpbiRDYWJpbiA8LSBOVUxMDQoNCm51bGxzIDwtIHRyYWluW3RyYWluJEVtYmFya2VkID09ICIiLF0NCnRhYmxlKHRyYWluJEVtYmFya2VkKQ0KdHJhaW5bdHJhaW4kTmFtZSA9PSAiSWNhcmQsIE1pc3MuIEFtZWxpZSIsIkVtYmFya2VkIl0gPC0gIkMiDQp0cmFpblt0cmFpbiROYW1lID09ICJTdG9uZSwgTXJzLiBHZW9yZ2UgTmVsc29uIChNYXJ0aGEgRXZlbHluKSIsIkVtYmFya2VkIl0gPC0gIkMiDQpgYGANCkVtZWxsZXR0IGEgdMOhYmxhdCBuw6l6dmUgYXJyYSBhIGTDtm50w6lzcmUganV0b3R0YW0sIGhvZ3kgYSBUaWNrZXQgb3N6bG9wIG1vc3QgbmVtIGZvZyBzZWfDrXRzZWdldCBuecO6anRhbmkgw7pneWhvZ3kgYXp0IGVsaGFneW9tLg0KYGBge3J9DQp0cmFpbiRUaWNrZXQgPC0gTlVMTA0KYGBgDQoNCiNNb3N0IGEgdGVzdCBoYWxtYXp0IGlzIHRla2ludHPDvGsgdWd5YW7DrWd5IG1lZzoNCmBgYHtyfQ0Kc3VtbWFyeSh0ZXN0KQ0Kc2FwcGx5KHRlc3QsIGZ1bmN0aW9uKHkpIHN1bShsZW5ndGgod2hpY2goaXMubmEoeSkpKSkpDQpzYXBwbHkodGVzdCwgZnVuY3Rpb24oeSkgc3VtKGxlbmd0aCh3aGljaCh5ID09ICIiKSkpKQ0KYGBgDQoNCkl0dCBhenQgbGF0anVrIGhvZ3kgYXogYWdlIG9zemxvcGJhbiBoaWFueXppayA4NiBlcnRlay4gRXogZWzDqWcgc29rIGhhIGF6dCBuZXp6dWsgaG9neSA0MTggc29yIHZhbiBhbGFwdmV0b2VuIGEgdGFibGFiYW4sIGRlIGV6ZWtrZWwgYSBzb3Jva2thbCBzYWpub3MgYWtrb3Igc2VtIHR1ZHVuayBtaXQgY3NpbmFsbmksIHRvcm9sbmkga2VsbC4NCklsbGV0dmUgYSBDYWJpbiBvc3psb3BvdCBpdHQgaXMgc3ppbnRlbiB0b3JvbGp1aywgaWxsZXR2ZSBhIHRpY2tldCBvc3psb3BvdCBpcy4NCg0KYGBge3J9DQp0ZXN0IDwtIG5hLm9taXQodGVzdCkNCg0KdGVzdCRDYWJpbiA8LSBOVUxMDQp0ZXN0JFRpY2tldCA8LSBOVUxMDQpgYGANCg0KI07DqXp6w7xrIG1lZyBob2d5IGF6IHV0YXNvayBow6FueSBzesOhemFsw6lrYSDDqWx0ZSB0w7psIGEgdGFuaXTDsyBhZGF0aGFsbWF6YmFuOg0KYGBge3J9DQp0ZW1wIDwtIHRhYmxlKHRyYWluJFN1cnZpdmVkID09IDEpDQpwY3QgPC0gKHRlbXBbMl0gLyAodGVtcFsxXSArIHRlbXBbMl0pKSoxMDANCmNhdChyb3VuZChwY3QsMiksIiUiKQ0KYGBgDQojbsOpenrDvGsgbWVnIGhvZ3kgYSB0w7psw6lsxZFrIGhvZ3lhbiBvc3psYW5hayBtZWcgbmVtZWsgc3plcmludDoNCmBgYHtyfQ0KZl9zZXggPC0gZmFjdG9yKHRyYWluJFNleCkNCmZfc3Vydml2ZWQgPC0gZmFjdG9yKHRyYWluJFN1cnZpdmVkKQ0KbWFsZXMgPC0gbGVuZ3RoKHRyYWluW3RyYWluJFN1cnZpdmVkID09IDEgJiB0cmFpbiRTZXggPT0gIm1hbGUiLCJOYW1lIl0pDQpmZW1hbGVzIDwtIGxlbmd0aCh0cmFpblt0cmFpbiRTdXJ2aXZlZCA9PSAxICYgdHJhaW4kU2V4ID09ICJmZW1hbGUiLCJOYW1lIl0pDQphbGxfc3Vydml2ZWQgPC0gbWFsZXMgKyBmZW1hbGVzDQpjYXQoIsOWc3N6ZXNlbiB0w7psw6lsdGU6IixhbGxfc3Vydml2ZWQsImVtYmVyLCBlYmLFkWwiLGZlbWFsZXMsIiBuxZEsIMOpcyIsbWFsZXMsImbDqXJmaSIpDQoNCnN1cnZpdmVkX2JhciA8LSBjKG1hbGVzLGZlbWFsZXMpDQpuYW1lcyhzdXJ2aXZlZF9iYXIpIDwtIGMoIm1hbGUiLCJmZW1hbGUiKQ0KDQpiYXJwbG90KHN1cnZpdmVkX2Jhcixob3JpeiA9IFQsY29sID0gc3Vydml2ZWRfYmFyLzEwLHhsaW09YygwLDIwMCksbWFpbj0gInTDumzDqWzFkWsgc3rDoW1hIG5lbWVrIHN6ZXJpbnQiKQ0KYGBgDQpMw6F0aGF0anVrIGhvZ3kgdMO2YmIgbWludCBrw6l0c3plcmFubnlpIG7FkSDDqWx0ZSB0w7psLCBtaW50IGbDqXJmaS4NCg0KI07DqXp6w7xrIG1lZyBlenQgc3rDoXphbMOpa29zIGFyw6FueWJhbiBpcy4NCmBgYHtyfQ0KZmVtYWxlUGN0IDwtIHN1bShzdXJ2aXZlZCRTZXggPT0gImZlbWFsZSIpIC8gc3VtKHRyYWluJFNleCA9PSAiZmVtYWxlIikNCm1hbGVQY3QgPC0gc3VtKHN1cnZpdmVkJFNleCA9PSAibWFsZSIpIC8gc3VtKHRyYWluJFNleCA9PSAibWFsZSIpDQoNCmFsbFBjdCA8LSBjKGZlbWFsZVBjdCxtYWxlUGN0KQ0KbmFtZXMoYWxsUGN0KSA8LSBjKCJmZW1hbGUiLCJtYWxlIikNCg0KYmFycGxvdChhbGxQY3QsY29sID0gYWxsUGN0KjEwLGhvcml6ID0gVCx4bGltID0gYygwLDEpLG1haW49IlTDumzDqWzDqXMgZXPDqWx5ZSBuZW1layBzemVyaW50IikNCmBgYA0Kw5NyacOhc2kga8O8bMO2bmJzw6lnZXQgdGFwYXN6dGFsdW5rIGEga8OpdCB2YWzDs3N6w61uxbFzw6lnYmVuLg0KDQoNCiNOw6l6enVrIG1lZyBheiBlbWJlcmVrIGtvcmFpbmFrIGVsb3N6bMOhc8OhdDoNCmBgYHtyfQ0KcGxvdCh4ID0gdHJhaW4kU2V4LCB5ID0gdHJhaW4kQWdlLA0KY29sID0iYmx1ZSIsIHBjaCA9IDEsIGNleCA9IDEuNSwNCm1haW4gPSAiVXRhc29rIGtvciBlbG9zemzDoXNhIG5lbSBzemVyaW50IiwNCnhsYWIgPSAiIiwNCnlsYWIgPSAiS29yIg0KKQ0KYGBgDQpNaW50IGzDoXRoYXRqdWssIGphdmFyw6lzenQgZmlhdGFsIGZlbG7FkXR0ZWsgw6lzIGvDtnrDqXBrb3LDumFrIHV0YXp0YWsgYSBoYWrDs24uDQpNb3N0IG5lenp1ayBtZWcgaG9neSBleiBob2d5IG5leiBraSwgaGEgY3NhayBhIHR1bGVsb2tldCB2ZXNzenVrIGJlbGU6DQpgYGB7cn0NCnN1cnZpdmVkIDwtIHRyYWluW3RyYWluJFN1cnZpdmVkID09IDEsXQ0KDQpwbG90KHggPSBzdXJ2aXZlZCRTZXgsIHkgPSBzdXJ2aXZlZCRBZ2UsDQpjb2wgPSJibHVlIiwgcGNoID0gMSwgY2V4ID0gMS41LA0KbWFpbiA9ICJUw7psw6lsxZFrIGtvciBlbG9zemzDoXNhIG5lbSBzemVyaW50IiwNCnhsYWIgPSAiIiwNCnlsYWIgPSAiS29yIg0KKQ0KYGBgDQojTW9zdCBuw6l6esO8ayBtZWcgc3rDoXphbMOpa29zYW4gYSB0w7psw6lsw6lzIGVzw6lsecOpdCwga29yb2tyYSBsZWJvbnR2YS4NCmBgYHtyfQ0Ka2lkcyA8LSBzdW0oc3Vydml2ZWQkQWdlIDwgMTApIC8gc3VtKHRyYWluJEFnZSA8IDEwKQ0KdGVlbmFnZXJzIDwtIHN1bShzdXJ2aXZlZCRBZ2UgPj0gMTAgJiBzdXJ2aXZlZCRBZ2UgPCAyMCkgLyBzdW0odHJhaW4kQWdlID49IDEwICYgdHJhaW4kQWdlIDwgMjApDQphZHVsdHMgPC0gc3VtKHN1cnZpdmVkJEFnZSA+PSAyMCAmIHN1cnZpdmVkJEFnZSA8IDUwKSAvIHN1bSh0cmFpbiRBZ2UgPj0gMjAgJiB0cmFpbiRBZ2UgPCA1MCkNCmVsZGVycyA8LSBzdW0oc3Vydml2ZWQkQWdlID49IDUwKSAvIHN1bShzdXJ2aXZlZCRBZ2UgPj0gNTApDQoNCmFsbEFnZXMgPC0gYyhraWRzLHRlZW5hZ2VycyxhZHVsdHMsZWxkZXJzKQ0KbmFtZXMoYWxsQWdlcykgPC0gYygiKDAtOSkiLCIoMTAtMTkpIiwiKDIwLTQ5KSIsIig1MC0pIikNCg0KYmFycGxvdChhbGxBZ2VzLGNvbCA9IHJhaW5ib3coMjUpLGhvcml6ID0gVCx4bGltID0gYygwLDEpLG1haW4gPSAiVMO6bMOpbMOpcyBlc8OpbHllIGtvciBzemVyaW50Iix4bGFiPSJWYWzDs3N6w61uxbFzw6lnIix5bGFiPSJLb3IiKQ0KYGBgDQpOYWd5b24gw6lyZGVrZXMgaW5mb3Jtw6FjacOzdCBvbHZhc2hhdHVuayBsZSBlcnLFkWwgYSBkaWFncmFtbXLDs2wuIEVsxZFzesO2cmlzLCBheiA1MCsga2F0ZWfDs3Jpw6FiYSB0YXJ0b3rDsyB1dGFzb2sgMTAwJS1vcyBlc8OpbGx5ZWwgdMO6bMOpbHTDqWsgYSBrYXRhc3p0csOzZsOhdCwgdmlzem9udCBhIDEwIGFsYXR0aWFrIGNzYWsgfjYwJS1vcyBlc8OpbGx5ZWwsIGFtaSBzem9tb3LDuiwgYXJyw7NsIG5lbSBpcyBlYnN6w6lsdmUgaG9neSBhIGZpYXRhbCBmZWxuxZF0dGVrIMOpcyBrw7Z6w6lwa29yw7phaywgY3NhayB+NDAlLW9zIGVzw6lsbHllbC4NCg0KI01vc3QgbsOpenrDvGsgbWVnIGhvZ3kgdGVzdHbDqXJlayBzemVyaW50IGhvZ3lhbiBvc3psYW5hayBtZWcgYXogdXRhc29rOg0KYGBge3J9DQpzaWJzYlRhYmxlIDwtIHRhYmxlKHRyYWluJFNpYlNwKQ0KYmFycGxvdChzaWJzYlRhYmxlLHlsYWI9InRlc3R2w6lyZWsgc3rDoW1hIix4bGFiPSJmxZFrIHN6w6FtYSIsaG9yaXogPSBULGNvbD0gcmFpbmJvdygyNSkseGxpbT1jKDAsMjAwKSxtYWluPSJVdGFzb2sgc3rDoW1hIHRlc3R2w6lyZWsgc3rDoW1hIHN6ZXJpbnQiKQ0KYGBgDQoNCkViYsWRbCBsw6F0aGF0anVrIGhvZ3kgYSBsZWd0w7ZiYmVuIHZhZ3kgZWd5w6FsdGFsw6FuIG5lbSwgdmFneSBjc2FrIGVneSB0ZXN0dsOpcnQgaG96dGFrIGF6IMO6dHJhLg0KDQojRXp1dMOhbiBhenQgaXMgZXJkZWtlcyBtZWdmaWd5ZWxuaSBob2d5IGjDoW55YW4gw6lya2V6dGVrIGd5ZXJtZWtrZWwgdmFneSBzesO8bMWRdmVsOg0KYGBge3J9DQpwYXJjaFRhYmxlIDwtIHRhYmxlKHRyYWluJFBhcmNoKQ0KYmFycGxvdChwYXJjaFRhYmxlLHlsYWI9InN6w7xsxZEgdmFneSBneWVyZWtlayBzesOhbWEiLHhsYWI9ImbFkWsgc3rDoW1hIixob3JpeiA9IFQsY29sPSByYWluYm93KDI1KSx4bGltPWMoMCwyMDApLG1haW4gPSAiVXRhc29rIHN6w6FtYSwgZ3llcmVrZWsvc3rDvGzFkWsgc3rDoW1hIHN6ZXJpbnQgY3NvcG9ydG9zw610dmEiKQ0KYGBgDQrDiXJkZWtlcyBob2d5IHZhbiBlZ3kgZXNldCBhaG9sIDYgZ3llcm1lay9zesO8bMWRIGlzIGrDtnR0IGF6IHV0YXNzYWwsIHZpc3pvbnQgbmFneXLDqXN6dCBpdHQgaXMgYXogdXRhc29rIHZhZ3kgZWd5w6FsdGFsw6FuIG5lbSB2YWd5IGNzYWsgZWd5IHN6w7xsxZEvZ3llcm1lay1ldCBob3p0YWsgbWFndWtrYWwuIEl0dCB0w7ZiYmVuIHZhbm5hayBvbHlhbm9rIGlzIGFraWsga2V0dMWRdmVsLCB2aXN6b250IGEgdMO2YmJpIG5hZ3lvbiBlbGVueWVzesWRLg0KDQojTW9zdCBuw6l6esO8ayBtZWcgaG9neSB1bmR1bMOhcyBzemVyaW50IGhvZ3lhbiBvc3psYW5hayBtZWcgYXogdXRhc29rOg0KYGBge3J9DQplbWJhcmtUYWJsZSA8LSB0YWJsZSh0cmFpbiRFbWJhcmtlZCkNCmJhcnBsb3QoZW1iYXJrVGFibGUsaG9yaXogPSBULHhsYWI9ImbFkWsgc3rDoW1hIix5bGFiPSJiZXN6w6FsbMOhcyBrw7NkamEiLGNvbCA9IHJhaW5ib3coMjUpLG1haW49IlV0YXNvayBzesOhbWEgaW5kdWzDoXMgc3plcmludCIpDQpgYGANCg0KI01vc3QgdWd5YW5lenQgYSB0w7psw6lsxZFrcmU6DQpgYGB7cn0NCnN1cnZpdmVkRW1iYXJrVGFibGUgPC0gdGFibGUoc3Vydml2ZWQkRW1iYXJrZWQpDQpiYXJwbG90KHN1cnZpdmVkRW1iYXJrVGFibGUsY29sID0gcmFpbmJvdygyNSksaG9yaXogPSBULHhsYWI9InTDumzDqWzFkWsgc3rDoW1hIix5bGFiPSJpbmR1bMOhcyBrw7NkamEiLG1haW49IlTDumzDqWzFkWsgc3rDoW1hIGluZHVsw6FzIHN6ZXJpbnQiKQ0KYGBgDQpMw6F0aGF0anVrIGhvZ3kgYXLDoW55YWliYW4gc3ppbnRlIHNlbW1pIHbDoWx0b3rDoXMgbmluY3MsIGNzYWsgYSBmxZFrIHN6w6Ftw6FiYW4uDQoNCiNNb3N0IG7DqXp6w7xrIG1lZyBob2d5IGF6IGluZHVsw6FzaSBrw7Nkb2sgbWVubnlpcmUgYmVmb2x5w6Fzb2x0w6FrIGEgdMO6bMOpbMOpcyBlc8OpbHnDqXQNCmBgYHtyfQ0KY1BjdCA8LSBzdW0oc3Vydml2ZWQkRW1iYXJrZWQgPT0gIkMiKSAvIHN1bSh0cmFpbiRFbWJhcmtlZCA9PSAiQyIpDQpxUGN0IDwtIHN1bShzdXJ2aXZlZCRFbWJhcmtlZCA9PSAiUSIpIC8gc3VtKHRyYWluJEVtYmFya2VkID09ICJRIikNCnNQY3QgPC0gc3VtKHN1cnZpdmVkJEVtYmFya2VkID09ICJTIikgLyBzdW0odHJhaW4kRW1iYXJrZWQgPT0gIlMiKQ0KDQphbGxQY3QgPC0gYyhjUGN0LHFQY3Qsc1BjdCkNCm5hbWVzKGFsbFBjdCkgPC0gYygiQyIsIlEiLCJTIikNCg0KYmFycGxvdChhbGxQY3QsY29sID0gcmFpbmJvdygyNSksbWFpbj0iVMO6bMOpbMOpc2kgZXPDqWx5IGluZHVsw6FzIHN6ZXJpbnQiLGhvcml6ID0gVCx4bGFiID0gInTDumzDqWzDqXNpIGVzw6lseSIseWxhYiA9ICJpbmR1bMOhc2kga8OzZCIseGxpbT0gYygwLDEpKQ0KYGBgDQrDjWd5IG1vc3Rtw6FyIGzDoXRoYXRqdWsgaG9neSBhIEMgaW5kdWzDoXNpIGvDs2RkYWwgcmVuZGVsa2V6xZFrIG5hZ3lvYmIgZXPDqWxseWVsIMOpbHTDqWsgdMO6bC4NCg0KI0V6dXRhbiBuZXp6dW5rIG1lZyBlZ3kga2ljc2l0IGVyZGVrZXNlYmIgb3NzemVmdWdnZXN0IGlzLCBtZWdwZWRpZyBob2d5IG9zenRhbHlvayBzemVyaW50IG1pbHllbiBlbG9zemxhc2JhbiBlbHRlayB0dWwgYXogdXRhc29rOg0KYGBge3J9DQpwY2xhc3NUYWJsZSA8LSB0YWJsZShzdXJ2aXZlZCRQY2xhc3MpDQpiYXJwbG90KHBjbGFzc1RhYmxlLHhsYWI9ImbFkWsgc3rDoW1hIiwgeWxhYj0ib3N6dMOhbHlvayIsY29sPXJhaW5ib3coMjUpLGhvcml6ID0gVCxtYWluID0gIlTDumzDqWzFkWsgc3rDoW1hIG9zenTDoWx5b2sgc3plcmludCIpDQpgYGANCg0Kw4lyZGVrZXMgbMOhdG5pIGhvZ3kgZWxzbyBvc3p0YWx5b24gdXRhem9rZW50IHNva2thbCBuYWd5b2JiIGVzZWxseWVsIGVsdGVrIHR1bCBheiBlbWJlcmVrLCDDqXMgaG9neSBhIG1hc29kaWsgZXMgaGFybWFkaWsgb3N6dGFseW9uIHVneWFuYW5ueWlhbiB2YW5uYWsgbmFneXNhZ3JlbmRpbGVnIGEgdHVsZWxvay4NCg0KI0V6dXRhbiBhenQgaXMgZXJkZWtlcyBsZW5uZSBtZWd0ZWtpbnRlbmkgaG9neSBzemF6YWxla29zIGFyYW55YmFuIGhvZ3kgbmV6IGtpIGEgdHVsZWxvayBhcmFueWEsIG9zenRhbHlvayBzemVyaW50Og0KYGBge3J9DQpjMXBjdCA8LSAoc3VtKHN1cnZpdmVkJFBjbGFzcyA9PSAxKSAvIHN1bSh0cmFpbiRQY2xhc3MgPT0gMSkpDQpjMnBjdCA8LSAoc3VtKHN1cnZpdmVkJFBjbGFzcyA9PSAyKSAvIHN1bSh0cmFpbiRQY2xhc3MgPT0gMikpDQpjM3BjdCA8LSAoc3VtKHN1cnZpdmVkJFBjbGFzcyA9PSAzKSAvIHN1bSh0cmFpbiRQY2xhc3MgPT0gMykpDQphbGxQY3QgPC0gYyhjMXBjdCxjMnBjdCxjM3BjdCkNCm5hbWVzKGFsbFBjdCkgPC0gYygxLDIsMykNCmJhcnBsb3QoYWxsUGN0LHhsaW09YygwLDEpLGhvcml6ID0gVCxjb2wgPSByYWluYm93KDI1KSx4bGFiID0gIlTDumzDqWzDqXMgZXPDqWx5ZSIseWxhYiA9ICJPc3p0w6FseW9rIHN6w6FtYSIsIG1haW4gPSAiVMO6bMOpbMOpcyBlc8OpbHllIG9zenTDoWx5b2sgc3plcmludCIpDQpgYGANClN6w6F6YWzDqWtvc2FuIG7DqXp2ZSBheiBhcsOhbnlva2F0IHZpc3pvbnQgbmFneW9uIGzDoXRzemlrLCBob2d5IG1pbsOpbCBhbGFjc29ueWFiYiBvc3p0w6FseW9uIHV0YXpvdHQgYXogdXRhcywgYW5uw6FsIGtldmVzZWJiIGVzw6lseWUgdm9sdCB0w7psw6lsbmkgYSBrYXRhc3p0csOzZsOhdC4NCg0KI01vc3QgbsOpenrDvGsgbWVnIGEga29ycmVsw6FjacOza2F0LCBhIGvDvGzDtm5iw7Z6xZEgYXR0cmliw7p0dW1vayBrw7Z6w7Z0dDoNCmBgYHtyfQ0KDQpgYGANCiNLb25rbMO6emnDs2sgYSBwcmVkaWtjacOzIGVsxZF0dDoNCiAgLWF6IHV0YXNvayBuZW1lIG5hZ3lvbiBmb250b3MgYWRhdCwgdWd5YW5pcyBzesOhbWJhbiDDqXMgYXLDoW55YWliYW4gaXMgc29ra2FsIHTDtmJiIG7FkSDDqWx0ZSB0w7psIG1pbnQgZsOpcmZpDQogIC1heiB1dGFzb2sga29yYSBpcyBmb250b3MgdMOpbnllesWRLCB1Z3lhbmlzIGF6IDUwKyBrw7Nyw7phayBzemludGUgMTAwJS1vc2FuIHTDumzDqWx0w6lrLCBtw61nIGEgZmlhdGFsIMOpcyBrw7Z6w6lwICAga29yw7phayBjc2FrIH40MCUtYmFuLg0KICAtYXogaW5kdWzDoXMgYXrDqXJ0IGZvbnRvcyB0w6lueWV6xZEsIG1lcnQgYXogZWd5aWsgaW5kdWzDoXNpIGvDs2Qga2llbWVsa2VkxZEgdMO6bMOpbMOpc2kgZXPDqWx5dCBtdXRhdA0KICAtYXogb3N6dMOhbHlvayBuYWd5b24gYmVmb2rDoXNvbMOzYWssIGhpc3plbSBheiBlbHPFkSBvc3p0w6FseW9uIHTDtmJiIG1pbnQgNjAlIGEgdMO6bMOpbMOpc2kgZXPDqWx5LCBtw6lnIGEgICAgICAgICAgaGFybWFkaWtvbiBjc2FrIGtpY3NpdCB0w7ZiYiBtaW50IDIwJSwgbWFqZG5lbSBhIGZlbGUuDQoNCiNNb3N0IGvDqXN6w610c8O8bmsgZWd5IHJlZ3Jlc3N6acOzcyBtb2RlbGx0LCBiaW5vbWnDoWxpcyBwcmVkaWt0b3JyYWw6DQpgYGB7cn0NCnRyYWluJFBjbGFzcyA8LSBhcy5mYWN0b3IodHJhaW4kUGNsYXNzKQ0KbW9kZWwgPC0gZ2xtKFN1cnZpdmVkIH4gQWdlICsgU2V4ICsgUGNsYXNzICsgRW1iYXJrZWQsIGRhdGEgPSB0cmFpbiwgZmFtaWx5ID0gImJpbm9taWFsIikNCnN1bW1hcnkobW9kZWwpDQpgYGANCiNFYmLFkWwgbGVvbHZhc2hhdGp1azoNCiAgLWF6IGFnZSBhdHRyaWLDunR1bSAwLDAzLWFsIHJvbnRqYSBheiB1dGFzIHTDumzDqWzDqXNpIGVzw6lsecOpdCh0ZWjDoXQgaGEgdmFsYWtpIGVneSDDqXZ2ZWwgaWTFkXNlYmIgbWludCBhICAgICAgICBtw6FzaWssIGFra29yIDAsMDMtYWwga2V2ZXNlYmIgYXogZXPDqWx5ZSBhIHTDumzDqWzDqXNyZSkNCiAgLWEgbmVtZWtuw6lsIGhhIGF6IHV0YXMgZsOpcmZpLCBha2tvciAyLjUyLXZlbCByb21saWsgYXogZXPDqWx5ZQ0KICAtYSBwY2xhc3MtbsOhbCAxLDE0LWVsIHJvbWxpayBheiBlc8OpbHksIGhhIHZhbGFraSBtw6Fzb2Qgb3N6dMOhbHlvbiB1dGF6b3R0LCBpbGxldHZlIDIsNDEtZWwsIGhhIGhhcm1hZCAgICAgICBvc3p0w6FseW9uDQoNCg0KI01vc3QgbsOpenrDvGsgbWVnIGhvZ3kgbWlseWVuIGVyZWRtw6lueXQga2FwdW5rIGEgdGVzenRhZGF0b2tyYQ0KYGBge3J9DQp0ZXN0JFBjbGFzcyA8LSBhcy5mYWN0b3IodGVzdCRQY2xhc3MpDQpwcmVkIDwtIHByZWRpY3QobW9kZWwsbmV3ZGF0YSA9IHRlc3QpDQoNCnRlc3RTdXJ2aXZlZCA8LSBwcmVkID4gMQ0KdGVzdFByZWQgPC0gZGF0YS5mcmFtZShQYXNzZW5nZXJJZCA9IHRlc3QkUGFzc2VuZ2VySWQsU3Vydml2ZWQgPSB0ZXN0U3Vydml2ZWQpDQp0ZXN0UHJlZCRTdXJ2aXZlZCA8LSBmYWN0b3IodGVzdFByZWQkU3Vydml2ZWQsYyhGQUxTRSxUUlVFKSxjKCcwJywnMScpKQ0Kc3VtKHRlc3RQcmVkJFN1cnZpdmVkID09ICcxJykgLyBsZW5ndGgodGVzdFByZWQkUGFzc2VuZ2VySWQpDQpgYGANCkVneSAyNCw3JS1vcyBlcmVkbcOpbnl0IGthcHR1bmssIGFtaSBuZW0gdMO6bCBqw7MuDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQo=</div>
 
 
 

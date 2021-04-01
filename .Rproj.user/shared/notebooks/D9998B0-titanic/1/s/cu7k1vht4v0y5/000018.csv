@@ -1,0 +1,5 @@
+"0","femalePct <- sum(survived$Sex == ""female"") / sum(train$Sex == ""female"")"
+"0","malePct <- sum(survived$Sex == ""male"") / sum(train$Sex == ""male"")"
+"0","allPct <- c(femalePct,malePct)"
+"0","names(allPct) <- c(""female"",""male"")"
+"0","barplot(allPct,col = allPct*10,horiz = T,xlim = c(0,1),main=""Túlélés esélye nemek szerint"")"

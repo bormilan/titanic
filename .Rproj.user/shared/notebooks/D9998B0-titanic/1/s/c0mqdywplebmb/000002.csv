@@ -1,0 +1,2 @@
+"0","embarkTable <- table(train$Embarked)"
+"0","barplot(embarkTable,horiz = T,xlab=""fők száma"",ylab=""beszállás kódja"",col = rainbow(25),main=""Utasok száma indulás szerint"")"

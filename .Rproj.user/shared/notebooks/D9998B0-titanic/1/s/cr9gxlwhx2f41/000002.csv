@@ -1,0 +1,2 @@
+"0","pclassTable <- table(survived$Pclass)"
+"0","barplot(pclassTable,xlab=""fők száma"", ylab=""osztályok"",col=rainbow(25),horiz = T,main = ""Túlélők száma osztályok szerint"")"

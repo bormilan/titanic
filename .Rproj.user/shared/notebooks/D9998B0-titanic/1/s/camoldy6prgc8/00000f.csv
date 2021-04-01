@@ -1,6 +1,0 @@
-"0","c1pct <- (sum(survived$Pclass == 1) / sum(train$Pclass == 1))"
-"0","c2pct <- (sum(survived$Pclass == 2) / sum(train$Pclass == 2))"
-"0","c3pct <- (sum(survived$Pclass == 3) / sum(train$Pclass == 3))"
-"0","allPct <- c(c1pct,c2pct,c3pct)"
-"0","names(allPct) <- c(1,2,3)"
-"0","barplot(allPct,xlim=c(0,1),horiz = T,col = rainbow(25))"

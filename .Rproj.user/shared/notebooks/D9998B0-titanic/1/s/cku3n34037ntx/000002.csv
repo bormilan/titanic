@@ -1,0 +1,7 @@
+"0","survived <- train[train$Survived == 1,]"
+"0","plot(x = survived$Sex, y = survived$Age,"
+"0","col =""blue"", pch = 1, cex = 1.5,"
+"0","main = ""Túlélők kor eloszlása nem szerint"","
+"0","xlab = """","
+"0","ylab = ""Kor"""
+"0",")"

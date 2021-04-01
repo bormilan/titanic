@@ -1,2 +1,0 @@
-"0","sibsbTable <- table(train$SibSp)"
-"0","barplot(sibsbTable,ylab=""testvérek száma"",xlab=""fők száma"",horiz = T,col= rainbow(25),xlim=c(0,200))"
