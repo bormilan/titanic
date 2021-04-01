@@ -1,0 +1,4 @@
+"0","test <- na.omit(test$Age)"
+"0","test$Cabin <- NULL"
+"2","Coercing LHS to a list"
+"0","test$Ticket <- NULL"
