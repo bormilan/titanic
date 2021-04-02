@@ -46,6 +46,7 @@ Itt azt latjuk hogy az age oszlopban hianyzik 86 ertek. Ez elég sok ha azt nezz
 Illetve a Cabin oszlopot itt is szinten toroljuk, illetve a ticket oszlopot is.
 
 ```{r}
+test$Survived <- result$Survived
 test <- na.omit(test)
 
 test$Cabin <- NULL
@@ -182,10 +183,6 @@ barplot(allPct,xlim=c(0,1),horiz = T,col = rainbow(25),xlab = "Túlélés esély
 ```
 Százalékosan nézve az arányokat viszont nagyon látszik, hogy minél alacsonyabb osztályon utazott az utas, annál kevesebb esélye volt túlélni a katasztrófát.
 
-#Most nézzük meg a korrelációkat, a különböző attribútumok között:
-```{r}
-
-```
 #Konklúziók a predikció előtt:
   -az utasok neme nagyon fontos adat, ugyanis számban és arányaiban is sokkal több nő élte túl mint férfi
   -az utasok kora is fontos tényező, ugyanis az 50+ kórúak szinte 100%-osan túlélték, míg a fiatal és közép   korúak csak ~40%-ban.
@@ -199,9 +196,9 @@ model <- glm(Survived ~ Age + Sex + Pclass + Embarked, data = train, family = "b
 summary(model)
 ```
 #Ebből leolvashatjuk:
-  -az age attribútum 0,03-al rontja az utas túlélési esélyét(tehát ha valaki egy évvel idősebb mint a        másik, akkor 0,03-al kevesebb az esélye a túlélésre)
+  -az age attribútum 0,03-al rontja az utas túlélési esélyét(tehát ha valaki egy évvel idősebb      mint a másik, akkor 0,03-al kevesebb az esélye a túlélésre)
   -a nemeknél ha az utas férfi, akkor 2.52-vel romlik az esélye
-  -a pclass-nál 1,14-el romlik az esély, ha valaki másod osztályon utazott, illetve 2,41-el, ha harmad       osztályon
+  -a pclass-nál 1,14-el romlik az esély, ha valaki másod osztályon utazott, illetve 2,41-el, ha     harmad       osztályon
 
 
 #Most nézzük meg hogy milyen eredményt kapunk a tesztadatokra
@@ -209,12 +206,35 @@ summary(model)
 test$Pclass <- as.factor(test$Pclass)
 pred <- predict(model,newdata = test)
 
-testSurvived <- pred > 1
-testPred <- data.frame(PassengerId = test$PassengerId,Survived = testSurvived)
-testPred$Survived <- factor(testPred$Survived,c(FALSE,TRUE),c('0','1'))
-sum(testPred$Survived == '1') / length(testPred$PassengerId)
+test$pred <- pred > 1
+test$pred <- factor(test$pred,c(FALSE,TRUE),c('0','1'))
+sum(test$pred == '1') / length(test$PassengerId)
 ```
-Egy 24,7%-os eredményt kaptunk, ami nem túl jó.
+A predikció szerint, a tesztadatok utasainak csupán a 24,7%-a élte túl.
+
+#Nézzük meg, hogy milyen arányban sikerült predikálni a túlélést:
+```{r}
+accuracy(test$Survived,test$pred)
+```
+Az accuracy függvény szerint, 85%-ban sikerült jól predikálni a túléléseket.
+
+#Modell kiértékelés
+```{r}
+cor(train$Survived,model$fitted.values)
+library(ROCR)
+library(Metrics)
+
+pr <- prediction(pred,test$Survived)
+perf <- performance(pr,measure = "tpr", x.measure = "fpr")
+plot(perf)
+auc(test$Survived,test$pred)
+```
+Az AUC elég magas, 81%, és a ROC görbe is jól mutatja, hogy kevés hibával dolgozott a modell.
+
+
+
+
+
 
 
 

@@ -1,6 +1,0 @@
-"0","sum(testPred$Survived == '1') / length(testPred$PassengerId)
-"
-"1","[1]"
-"1"," 0.2477341"
-"1","
-"
