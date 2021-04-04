@@ -170,7 +170,7 @@ pclassTable <- table(survived$Pclass)
 barplot(pclassTable,xlab="fők száma", ylab="osztályok",col=rainbow(25),horiz = T,main = "Túlélők száma osztályok szerint")
 ```
 
-Érdekes látni hogy elso osztalyon utazokent sokkal nagyobb esellyel eltek tul az emberek, és hogy a masodik es harmadik osztalyon ugyanannyian vannak nagysagrendileg a tulelok.
+Érdekes látni hogy első osztályon utazóként sokkal nagyobb eséllyel élték túl az emberek, és hogy a második és harmadik osztályon ugyanannyian vannak nagysagrendileg a túlélők.
 
 #Ezutan azt is erdekes lenne megtekinteni hogy szazalekos aranyban hogy nez ki a tulelok aranya, osztalyok szerint:
 ```{r}
@@ -188,17 +188,31 @@ Százalékosan nézve az arányokat viszont nagyon látszik, hogy minél alacson
   -az utasok kora is fontos tényező, ugyanis az 50+ kórúak szinte 100%-osan túlélték, míg a fiatal és közép   korúak csak ~40%-ban.
   -az indulás azért fontos tényező, mert az egyik indulási kód kiemelkedő túlélési esélyt mutat
   -az osztályok nagyon befojásolóak, hiszem az első osztályon több mint 60% a túlélési esély, még a          harmadikon csak kicsit több mint 20%, majdnem a fele.
+  
+#Most vizsgáljuk meg az attribútumok közötti korrelációkat:
+-ehhez numerikus értékké kell alakítani amit tudunk, amit meg nem(Name,Embarked stb.) azt meg kihagyjuk.
+```{r}
+corTrain <- train
+corTrain$PassengerId <- NULL
+corTrain$Name <- NULL
+corTrain$Embarked <- NULL
+corTrain$Sex <- as.numeric(train$Sex)
+corTrain$Pclass <- as.numeric(train$Pclass)
+cor(corTrain)
+```
 
 #Most készítsünk egy regressziós modellt, binomiális prediktorral:
 ```{r}
 train$Pclass <- as.factor(train$Pclass)
-model <- glm(Survived ~ Age + Sex + Pclass + Embarked, data = train, family = "binomial")
+model <- glm(Survived ~ Age + Sex + Pclass + Embarked, data = train, family = binomial)
 summary(model)
 ```
 #Ebből leolvashatjuk:
-  -az age attribútum 0,03-al rontja az utas túlélési esélyét(tehát ha valaki egy évvel idősebb      mint a másik, akkor 0,03-al kevesebb az esélye a túlélésre)
   -a nemeknél ha az utas férfi, akkor 2.52-vel romlik az esélye
-  -a pclass-nál 1,14-el romlik az esély, ha valaki másod osztályon utazott, illetve 2,41-el, ha     harmad       osztályon
+  -a pclass-nál 1,14-el romlik az esély, ha valaki másod osztályon utazott, illetve 2,41-el, ha harmad osztályon
+```{r}
+exp(model$coefficients)
+```
 
 
 #Most nézzük meg hogy milyen eredményt kapunk a tesztadatokra
@@ -210,7 +224,7 @@ test$pred <- pred > 1
 test$pred <- factor(test$pred,c(FALSE,TRUE),c('0','1'))
 sum(test$pred == '1') / length(test$PassengerId)
 ```
-A predikció szerint, a tesztadatok utasainak csupán a 24,7%-a élte túl.
+A predikció szerint a tesztadatok utasainak csupán a 24,7%-a élte túl.
 
 #Nézzük meg, hogy milyen arányban sikerült predikálni a túlélést:
 ```{r}
@@ -230,10 +244,6 @@ plot(perf)
 auc(test$Survived,test$pred)
 ```
 Az AUC elég magas, 81%, és a ROC görbe is jól mutatja, hogy kevés hibával dolgozott a modell.
-
-
-
-
 
 
 

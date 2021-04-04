@@ -1,9 +1,10 @@
-"0","summary(model)
-"
+"0","train$Pclass <- as.factor(train$Pclass)"
+"0","model <- glm(Survived ~ Age + Sex + Pclass + Embarked, data = train, family = binomial)"
+"0","summary(model)"
 "1","
 Call:
 "
-"1","glm(formula = Survived ~ Age + Sex + Pclass + Embarked, family = ""binomial"", 
+"1","glm(formula = Survived ~ Age + Sex + Pclass + Embarked, family = binomial, 
     data = train)"
 "1","
 
