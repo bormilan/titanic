@@ -1,3 +1,4 @@
+"0","test$Survived <- result$Survived"
 "0","test <- na.omit(test)"
 "0","test$Cabin <- NULL"
 "0","test$Ticket <- NULL"

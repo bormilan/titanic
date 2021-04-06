@@ -10,6 +10,12 @@ test <- read.csv('test.csv')
 result <- read.csv('gender_submission.csv')
 ```
 
+#a notebookban használt library-k:
+```{r}
+library(ROCR)
+library(Metrics)
+```
+
 #Elemezzuk a típusaikat és értékeiket:
 ```{r}
 str(train)
@@ -29,10 +35,15 @@ nulls <- train[train$Embarked == "",]
 table(train$Embarked)
 train[train$Name == "Icard, Miss. Amelie","Embarked"] <- "C"
 train[train$Name == "Stone, Mrs. George Nelson (Martha Evelyn)","Embarked"] <- "C"
+train$Embarked <- droplevels(train$Embarked)
 ```
 Emellett a táblat nézve arra a döntésre jutottam, hogy a Ticket oszlop most nem fog segítseget nyújtani úgyhogy azt elhagyom.
 ```{r}
 train$Ticket <- NULL
+```
+változtassuk meg a pclass oszlop típusát
+```{r}
+train$Pclass <- as.factor(train$Pclass)
 ```
 
 #Most a test halmazt is tekintsük ugyanígy meg:
@@ -52,6 +63,12 @@ test <- na.omit(test)
 test$Cabin <- NULL
 test$Ticket <- NULL
 ```
+
+változtassuk meg a pclass oszlop típusát
+```{r}
+test$Pclass <- as.factor(test$Pclass)
+```
+
 
 #Nézzük meg hogy az utasok hány százaléka élte túl a tanitó adathalmazban:
 ```{r}
@@ -77,6 +94,8 @@ Láthatjuk hogy több mint kétszerannyi nő élte túl, mint férfi.
 
 #Nézzük meg ezt százalékos arányban is.
 ```{r}
+survived <- train[train$Survived == 1,]
+
 femalePct <- sum(survived$Sex == "female") / sum(train$Sex == "female")
 malePct <- sum(survived$Sex == "male") / sum(train$Sex == "male")
 
@@ -100,8 +119,6 @@ ylab = "Kor"
 Mint láthatjuk, javarészt fiatal felnőttek és középkorúak utaztak a hajón.
 Most nezzuk meg hogy ez hogy nez ki, ha csak a tuleloket vesszuk bele:
 ```{r}
-survived <- train[train$Survived == 1,]
-
 plot(x = survived$Sex, y = survived$Age,
 col ="blue", pch = 1, cex = 1.5,
 main = "Túlélők kor eloszlása nem szerint",
@@ -203,7 +220,6 @@ cor(corTrain)
 
 #Most készítsünk egy regressziós modellt, binomiális prediktorral:
 ```{r}
-train$Pclass <- as.factor(train$Pclass)
 model <- glm(Survived ~ Age + Sex + Pclass + Embarked, data = train, family = binomial)
 summary(model)
 ```
@@ -217,12 +233,11 @@ exp(model$coefficients)
 
 #Most nézzük meg hogy milyen eredményt kapunk a tesztadatokra
 ```{r}
-test$Pclass <- as.factor(test$Pclass)
 pred <- predict(model,newdata = test)
 
 test$pred <- pred > 1
 test$pred <- factor(test$pred,c(FALSE,TRUE),c('0','1'))
-sum(test$pred == '1') / length(test$PassengerId)
+sum(test$pred == "1") / length(test$PassengerId)
 ```
 A predikció szerint a tesztadatok utasainak csupán a 24,7%-a élte túl.
 
@@ -235,8 +250,6 @@ Az accuracy függvény szerint, 85%-ban sikerült jól predikálni a túlélése
 #Modell kiértékelés
 ```{r}
 cor(train$Survived,model$fitted.values)
-library(ROCR)
-library(Metrics)
 
 pr <- prediction(pred,test$Survived)
 perf <- performance(pr,measure = "tpr", x.measure = "fpr")
@@ -245,36 +258,37 @@ auc(test$Survived,test$pred)
 ```
 Az AUC elég magas, 81%, és a ROC görbe is jól mutatja, hogy kevés hibával dolgozott a modell.
 
+#Most alkalmazzuk rajta a randomForest klasszifikációs modellt:
+```{r}
+library(randomForest)
 
+modelRF <- randomForest(factor(Survived) ~ Pclass + Fare + Embarked + Sex, data=train, importance=TRUE)
+modelRF
+```
+A keveredési mátrixból lehet látni, hogy milyen számban osztályozott a modell helyesen, illetve helytelenül.
+400 + 172 alkalommal helyesen, míg 24 + 118 alkalommal helytelenül.
 
+#Nézzük meg az attribútumok fontosságait:
+```{r}
+varImpPlot(modelRF)
+```
+```{r}
+importance(modelRF)
+```
+Ezekből láthatjuk hogy a különböző attribútumok milyen fontosságúak.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#miután kész a modell, jöhet a predikció:
+```{r}
+test$predRF <- predict(modelRF,newdata = test)
+sum(test$predRF == "1") / length(test$PassengerId)
+```
+Ezuttal már az utasok 31%-a élte túl, ebből arra következtethetünk, hogy vagy jobb lesz a teljesítménye ennek a modellnek, vagy pedig sok false positive eredmény lett, tehát olyan utas, aki nem élte túl, túléltnek osztályozva.
+#az accuracy-vel ezt leellenőrizhetjük:
+```{r}
+accuracy(test$Survived,test$predRF)
+```
+Láthatjuk, hogy valóban sokkal jobb eredményt ért el ez a modell.
+A következtetés ez alapján, hogy erre az adott adathalmazra sokkal jobb megoldás egy osztályozó algoritmus, mint egy regressziós. Ezt lehet látni abból is, hogy az age szerinti túlélési arány nem lineáris, a középkorúak kevesebb eséllyel élték túl, mint az öregek és mint a gyerekek, illetve a többi attribútum típusa, inkább faktorként kezelendő, ezek sem lineárisak.
 
 
 

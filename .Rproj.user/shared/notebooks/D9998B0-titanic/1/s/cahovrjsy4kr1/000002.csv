@@ -1,5 +1,4 @@
-"0","exp(model$coefficients)
-"
+"0","exp(model$coefficients)"
 "1","(Intercept) "
 "1","        Age "
 "1","    Sexmale "

@@ -1,4 +1,3 @@
-"0","train$Pclass <- as.factor(train$Pclass)"
 "0","model <- glm(Survived ~ Age + Sex + Pclass + Embarked, data = train, family = binomial)"
 "0","summary(model)"
 "1","

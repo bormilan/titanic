@@ -1,6 +1,7 @@
-"0","nulls <- train[train$Embarked == """",]
-table(train$Embarked)
-"
+"0","train <- na.omit(train)"
+"0","train$Cabin <- NULL"
+"0","nulls <- train[train$Embarked == """",]"
+"0","table(train$Embarked)"
 "1","
 "
 "1","    "
@@ -17,3 +18,4 @@ table(train$Embarked)
 "
 "0","train[train$Name == ""Icard, Miss. Amelie"",""Embarked""] <- ""C"""
 "0","train[train$Name == ""Stone, Mrs. George Nelson (Martha Evelyn)"",""Embarked""] <- ""C"""
+"0","train$Embarked <- droplevels(train$Embarked)"

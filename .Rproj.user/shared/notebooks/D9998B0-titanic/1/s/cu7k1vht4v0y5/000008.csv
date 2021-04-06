@@ -1,3 +1,4 @@
+"0","survived <- train[train$Survived == 1,]"
 "0","femalePct <- sum(survived$Sex == ""female"") / sum(train$Sex == ""female"")"
 "0","malePct <- sum(survived$Sex == ""male"") / sum(train$Sex == ""male"")"
 "0","allPct <- c(femalePct,malePct)"
