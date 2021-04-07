@@ -1,6 +1,6 @@
 ---
 title: "Titanic Temalabor"
-output: html_notebook
+output: irnb_notebook
 ---
 
 #Olvassuk be az adatokat:
