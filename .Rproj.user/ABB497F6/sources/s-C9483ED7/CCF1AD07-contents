@@ -1,6 +1,6 @@
 ---
 title: "Titanic Temalabor"
-output: irnb_notebook
+output: html_notebook
 ---
 
 #Olvassuk be az adatokat:
@@ -14,6 +14,7 @@ result <- read.csv('gender_submission.csv')
 ```{r}
 library(ROCR)
 library(Metrics)
+library(randomForest)
 ```
 
 #Elemezzuk a típusaikat és értékeiket:
@@ -260,15 +261,13 @@ Az AUC elég magas, 81%, és a ROC görbe is jól mutatja, hogy kevés hibával 
 
 #Most alkalmazzuk rajta a randomForest klasszifikációs modellt:
 ```{r}
-library(randomForest)
-
 modelRF <- randomForest(factor(Survived) ~ Pclass + Fare + Embarked + Sex, data=train, importance=TRUE)
 modelRF
 ```
 A keveredési mátrixból lehet látni, hogy milyen számban osztályozott a modell helyesen, illetve helytelenül.
 400 + 172 alkalommal helyesen, míg 24 + 118 alkalommal helytelenül.
 
-#Nézzük meg az attribútumok fontosságait:
+#Most elemezzük a modellt:
 ```{r}
 varImpPlot(modelRF)
 ```
@@ -290,5 +289,7 @@ accuracy(test$Survived,test$predRF)
 Láthatjuk, hogy valóban sokkal jobb eredményt ért el ez a modell.
 A következtetés ez alapján, hogy erre az adott adathalmazra sokkal jobb megoldás egy osztályozó algoritmus, mint egy regressziós. Ezt lehet látni abból is, hogy az age szerinti túlélési arány nem lineáris, a középkorúak kevesebb eséllyel élték túl, mint az öregek és mint a gyerekek, illetve a többi attribútum típusa, inkább faktorként kezelendő, ezek sem lineárisak.
 
-
-
+Köszönöm hogy végigolvastad ezt a notebookot.
+Forrás:
+  -a dataset itt található meg: https://www.kaggle.com/c/titanic
+  -a randomForest alkalmazását innen tanultam:                     https://www.kaggle.com/lashkare/simple-yet-effective-titanic-solution#SPLITTING-DATA-INTO-TRAINING-AND-TEST-SET

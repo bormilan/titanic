@@ -14,6 +14,7 @@ result <- read.csv('gender_submission.csv')
 ```{r}
 library(ROCR)
 library(Metrics)
+library(randomForest)
 ```
 
 #Elemezzuk a típusaikat és értékeiket:
@@ -260,15 +261,13 @@ Az AUC elég magas, 81%, és a ROC görbe is jól mutatja, hogy kevés hibával 
 
 #Most alkalmazzuk rajta a randomForest klasszifikációs modellt:
 ```{r}
-library(randomForest)
-
 modelRF <- randomForest(factor(Survived) ~ Pclass + Fare + Embarked + Sex, data=train, importance=TRUE)
 modelRF
 ```
 A keveredési mátrixból lehet látni, hogy milyen számban osztályozott a modell helyesen, illetve helytelenül.
 400 + 172 alkalommal helyesen, míg 24 + 118 alkalommal helytelenül.
 
-#Nézzük meg az attribútumok fontosságait:
+#Most elemezzük a modellt:
 ```{r}
 varImpPlot(modelRF)
 ```
@@ -292,5 +291,5 @@ A következtetés ez alapján, hogy erre az adott adathalmazra sokkal jobb megol
 
 Köszönöm hogy végigolvastad ezt a notebookot.
 Forrás:
-  -a dataset itt található meg: https://www.kaggle.com/c/titanic 
+  -a dataset itt található meg: https://www.kaggle.com/c/titanic
   -a randomForest alkalmazását innen tanultam:                     https://www.kaggle.com/lashkare/simple-yet-effective-titanic-solution#SPLITTING-DATA-INTO-TRAINING-AND-TEST-SET

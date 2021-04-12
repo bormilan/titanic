@@ -1,8 +1,0 @@
-"0","cor(train$Survived,model$fitted.values)"
-"1","[1]"
-"1"," 0.6403839"
-"1","
-"
-"0","pr <- prediction(pred,test$Survived)"
-"0","perf <- performance(pr,measure = ""tpr"", x.measure = ""fpr"")"
-"0","plot(perf)"

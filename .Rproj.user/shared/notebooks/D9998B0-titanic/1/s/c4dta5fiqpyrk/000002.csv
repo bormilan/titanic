@@ -1,6 +1,6 @@
-"0","sum(test$predRF == ""1"") / length(test$PassengerId)
-"
+"0","test$predRF <- predict(modelRF,newdata = test)"
+"0","sum(test$predRF == ""1"") / length(test$PassengerId)"
 "1","[1]"
-"1"," 0.3111782"
+"1"," 0.2990937"
 "1","
 "
